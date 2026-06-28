@@ -5,7 +5,9 @@ import Tailwind from "./icons/Tailwind.astro"
 import ExternalLink from "./icons/ExternalLink.astro"
 import LinkButton from "./LinkButton.astro"
 import projectsData from "@/data/projects.json"
-import { TECHNOLOGIES } from "@/data/technologies"
+import { TECHNOLOGIES, validateProjectTags } from "@/data/technologies"
+
+validateProjectTags(projectsData)
 
 const TAG_ICONS: Record<string, any> = {
   NEXT: NextJS,

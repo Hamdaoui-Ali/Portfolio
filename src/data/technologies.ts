@@ -188,3 +188,28 @@ export const TECHNOLOGIES: Record<string, Technology> = {
 export function getTechnology(key: string): Technology | undefined {
   return TECHNOLOGIES[key]
 }
+
+export function validateProjectTags(
+  projects: { title: string; tags: string[] }[]
+): void {
+  const allKeys = Object.keys(TECHNOLOGIES)
+  let hasErrors = false
+
+  for (const project of projects) {
+    for (const tag of project.tags) {
+      if (!TECHNOLOGIES[tag]) {
+        console.error(
+          `[technologies] Unknown technology key "${tag}" in project "${project.title}". ` +
+            `Valid keys: ${allKeys.join(", ")}`
+        )
+        hasErrors = true
+      }
+    }
+  }
+
+  if (hasErrors) {
+    throw new Error(
+      "Invalid technology keys found in project data. See errors above for details."
+    )
+  }
+}
