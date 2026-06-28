@@ -76,6 +76,16 @@ const navItems = NAV_ITEMS
     animation: nav-appear 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
+
+    --nav-bg-to: rgba(255, 255, 255, 0.6);
+    --nav-border-to: rgba(229, 231, 235, 0.2);
+    --nav-ring-to: rgba(255, 255, 255, 0.1);
+  }
+
+  .dark .header-nav {
+    --nav-bg-to: rgba(17, 24, 39, 0.8);
+    --nav-border-to: rgba(255, 255, 255, 0.05);
+    --nav-ring-to: rgba(255, 255, 255, 0.05);
   }
 
   .header-nav {
@@ -88,10 +98,19 @@ const navItems = NAV_ITEMS
 
   @keyframes nav-appear {
     0% {
-      @apply dark:bg-gray-900/0 bg-white/0 border-transparent shadow-none;
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
     }
     to {
-      @apply shadow-lg ring-1 backdrop-blur-md ring-white/10 dark:ring-white/5 border-gray-200/20 dark:border-white/5;
+      background-color: var(--nav-bg-to);
+      box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px rgba(0, 0, 0, 0.1),
+        0 0 0 1px var(--nav-ring-to);
+      backdrop-filter: blur(12px);
+      border-color: var(--nav-border-to);
     }
   }
 </style>
