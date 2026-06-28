@@ -6,6 +6,7 @@ import { TECHNOLOGIES } from "@/data/technologies"
 import GitHubIcon from "@/components/icons/GitHub.astro"
 import ExternalLinkIcon from "@/components/icons/ExternalLink.astro"
 import LinkButton from "@/components/LinkButton.astro"
+import BeforeAfterMigration from "@/components/BeforeAfterMigration.astro"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -111,6 +112,30 @@ const { title, summary, status, role, category, image, github, demo, stack } =
             </LinkButton>
           )}
         </div>
+      )
+    }
+
+    {
+      slug === "ai-migration-factory" && (
+        <BeforeAfterMigration
+          context="Migration example: modernizing a Java + Spring Boot application"
+          beforeTitle="Legacy Stack"
+          beforeItems={[
+            "Java 8 runtime",
+            "Spring Boot 2.x",
+            "JUnit 4 test framework",
+            "XML-based configuration",
+            "Legacy dependency versions with known CVEs",
+          ]}
+          afterTitle="Modernized Stack"
+          afterItems={[
+            "Java 21 LTS runtime",
+            "Spring Boot 3.x with native compilation support",
+            "JUnit 5 with parameterized test support",
+            "Java-based configuration with auto-configuration",
+            "Updated dependencies with security patches applied",
+          ]}
+        />
       )
     }
 
