@@ -5,23 +5,21 @@ import Tailwind from "./icons/Tailwind.astro"
 import ExternalLink from "./icons/ExternalLink.astro"
 import LinkButton from "./LinkButton.astro"
 import projectsData from "@/data/projects.json"
+import { TECHNOLOGIES } from "@/data/technologies"
 
-const TAGS: Record<string, { name: string; class: string; icon: any }> = {
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
-    icon: NextJS,
-  },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    class: "bg-[#003159] text-white",
-    icon: Tailwind,
-  },
+const TAG_ICONS: Record<string, any> = {
+  NEXT: NextJS,
+  TAILWIND: Tailwind,
 }
 
 const PROJECTS = projectsData.map((project) => ({
   ...project,
-  tags: project.tags.map((key) => TAGS[key]),
+  tags: project.tags.map((key) => {
+    const tech = TECHNOLOGIES[key]
+    return tech
+      ? { ...tech, icon: TAG_ICONS[key] ?? null }
+      : { name: key, class: "bg-gray-500 text-white", icon: null }
+  }),
 }))
 ---
 
@@ -43,12 +41,12 @@ const PROJECTS = projectsData.map((project) => ({
     <ul class="flex flex-row flex-wrap mt-3 gap-2">
       {tags.map((tag) => (
         <li>
-          <span
-            class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
-          >
-            <tag.icon class="size-4" />
-            {tag.name}
-          </span>
+            <span
+              class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+            >
+              {tag.icon && <tag.icon class="size-4" />}
+              {tag.name}
+            </span>
         </li>
       ))}
     </ul>
