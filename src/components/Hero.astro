@@ -25,7 +25,7 @@ import { SITE_CONFIG } from "@/data/site"
       />
     </div>
     <a
-      href={`https://linkedin.com/in/${SITE_CONFIG.linkedInHandle}`}
+      href={SITE_CONFIG.linkedInUrl}
       target="_blank"
       rel="noopener noreferrer"
       class="flex items-center transition md:justify-center md:hover:scale-105"
@@ -45,7 +45,7 @@ import { SITE_CONFIG } from "@/data/site"
   >
     Full-Stack Software Engineer. <strong
       >Specialized in modern web development</strong
-    >. Building high-performance web applications from Rabat, Morocco 🇲🇦.
+    >. Building high-performance web applications from Morocco, Rabat-Salé 🇲🇦.
   </p>
 
   <nav
@@ -56,11 +56,11 @@ import { SITE_CONFIG } from "@/data/site"
       <MailIcon class="size-4" />
       Contact me
     </SocialPill>
-    <SocialPill href={`https://linkedin.com/in/${SITE_CONFIG.linkedInHandle}`}>
+    <SocialPill href={SITE_CONFIG.linkedInUrl}>
       <LinkedInIcon class="size-4" />
       LinkedIn
     </SocialPill>
-    <SocialPill href={`https://github.com/${SITE_CONFIG.githubHandle}`}>
+    <SocialPill href={SITE_CONFIG.githubUrl}>
       <GitHubIcon class="size-4" />
       GitHub
     </SocialPill>

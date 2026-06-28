@@ -28,8 +28,8 @@ const jsonLd = {
   name: SITE_CONFIG.author,
   url: siteUrl,
   sameAs: [
-    `https://linkedin.com/in/${SITE_CONFIG.linkedInHandle}`,
-    `https://github.com/${SITE_CONFIG.githubHandle}`,
+    SITE_CONFIG.linkedInUrl,
+    SITE_CONFIG.githubUrl,
   ],
   jobTitle: "Full-Stack Software Engineer",
   worksFor: {
