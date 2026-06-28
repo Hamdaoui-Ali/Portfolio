@@ -1,5 +1,6 @@
 ---
 import HeartFilled from "./icons/HeartFilled.astro"
+import { SITE_CONFIG } from "@/data/site"
 const currentYear = new Date().getFullYear()
 ---
 
@@ -11,14 +12,14 @@ const currentYear = new Date().getFullYear()
   >
     <span class="text-sm text-center text-pretty md:text-left text-zinc-800/90 dark:text-zinc-200/90"
       >&copy; {currentYear}
-      <a href="https://github.com/Hamdaoui-Ali" class="hover:underline">Ali Hamdaoui</a>. Hecho con <HeartFilled class="size-3.5 text-red-500 inline" aria-label="amor" /> Casi
+      <a href={`https://github.com/${SITE_CONFIG.githubHandle}`} class="hover:underline">Ali Hamdaoui</a>. Hecho con <HeartFilled class="size-3.5 text-red-500 inline" aria-label="amor" /> Casi
       todos los derechos reservados
     </span>
     <ul
       class="flex flex-wrap items-center text-sm font-medium dark:text-white/90"
     >
       <li>
-        <a id="contacto" href="mailto:hamdaoui.ali@protonmail.com" class="hover:underline"
+        <a id="contacto" href={`mailto:${SITE_CONFIG.email}`} class="hover:underline"
           >Contacto</a
         >
       </li>

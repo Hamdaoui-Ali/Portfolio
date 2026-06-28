@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro"
+import { SITE_CONFIG } from "@/data/site"
 
 import AboutMe from "@/components/AboutMe.astro"
 import Briefcase from "@/components/icons/Briefcase.astro"
@@ -13,8 +14,8 @@ import TitleSection from "@/components/TitleSection.astro"
 ---
 
 <Layout
-  title="Portfolio de Ali Hamdaoui - Full-Stack Software Engineer"
-  description="Portfolio de Ali Hamdaoui, Full-Stack Software Engineer. Especializado en crear aplicaciones web modernas y de alto rendimiento."
+  title={SITE_CONFIG.title}
+  description={SITE_CONFIG.description}
 >
   <main class="px-4">
     <SectionContainer class="py-16 md:py-36">
