@@ -4,7 +4,7 @@ export type TechCategory =
   | "Data & BI"
   | "Automation"
   | "DevOps"
-  | "AI"
+  | "AI & Modernization"
   | "Testing"
   | "Full-Stack"
 
@@ -59,12 +59,30 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-[#009688] text-white",
     category: "Backend",
   },
+  NET: {
+    key: "NET",
+    name: ".NET Web API",
+    class: "bg-[#512BD4] text-white",
+    category: "Backend",
+  },
 
   // ── Frontend ───────────────────────────────────────────
   ANGULAR: {
     key: "ANGULAR",
     name: "Angular",
     class: "bg-[#DD0031] text-white",
+    category: "Frontend",
+  },
+  REACT: {
+    key: "REACT",
+    name: "React",
+    class: "bg-[#61DAFB] text-black",
+    category: "Frontend",
+  },
+  BOOTSTRAP: {
+    key: "BOOTSTRAP",
+    name: "Bootstrap",
+    class: "bg-[#7952B3] text-white",
     category: "Frontend",
   },
   NEXT: {
@@ -109,6 +127,24 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "POWER_BI",
     name: "Power BI",
     class: "bg-[#F2C811] text-black",
+    category: "Data & BI",
+  },
+  POSTGRESQL: {
+    key: "POSTGRESQL",
+    name: "PostgreSQL",
+    class: "bg-[#4169E1] text-white",
+    category: "Data & BI",
+  },
+  SQLITE: {
+    key: "SQLITE",
+    name: "SQLite",
+    class: "bg-[#003B57] text-white",
+    category: "Data & BI",
+  },
+  MONGODB: {
+    key: "MONGODB",
+    name: "MongoDB",
+    class: "bg-[#47A248] text-white",
     category: "Data & BI",
   },
 
@@ -182,6 +218,26 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     name: "Vercel",
     class: "bg-black text-white",
     category: "DevOps",
+  },
+
+  // ── AI & Modernization ──────────────────────────────────
+  AZURE_OPENAI: {
+    key: "AZURE_OPENAI",
+    name: "Azure OpenAI",
+    class: "bg-[#0078D4] text-white",
+    category: "AI & Modernization",
+  },
+  LLM_MIGRATION: {
+    key: "LLM_MIGRATION",
+    name: "LLM-Assisted Migration",
+    class: "bg-[#7C3AED] text-white",
+    category: "AI & Modernization",
+  },
+  CODE_ANALYSIS: {
+    key: "CODE_ANALYSIS",
+    name: "Code Analysis",
+    class: "bg-[#059669] text-white",
+    category: "AI & Modernization",
   },
 }
 
