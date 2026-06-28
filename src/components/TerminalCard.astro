@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string
+  command?: string
+  output?: string
+}
+
+const { title, command, output } = Astro.props
+---
+
+<div class="not-prose my-8 rounded-xl overflow-hidden border border-gray-700/40 bg-[#1e1e2e] dark:bg-[#11111b] shadow-xl">
+  <!-- Title bar -->
+  <div class="flex items-center gap-3 px-4 py-3 bg-[#181825] dark:bg-[#0d0d15] border-b border-gray-700/30">
+    <div class="flex gap-1.5">
+      <span class="w-3 h-3 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+      <span class="w-3 h-3 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+      <span class="w-3 h-3 rounded-full bg-[#28c840]" aria-hidden="true"></span>
+    </div>
+    {title && (
+      <span class="text-xs text-gray-400 font-mono truncate">{title}</span>
+    )}
+  </div>
+
+  <!-- Terminal body -->
+  <div class="p-4 font-mono text-sm leading-relaxed">
+    {command && (
+      <div class="flex gap-2 mb-2">
+        <span class="text-green-400 select-none">$</span>
+        <span class="text-gray-200 dark:text-gray-100">{command}</span>
+      </div>
+    )}
+    {output && (
+      <pre class="text-gray-400 dark:text-gray-300 whitespace-pre-wrap m-0">{output}</pre>
+    )}
+    <slot />
+  </div>
+</div>

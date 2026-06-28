@@ -7,6 +7,7 @@ import GitHubIcon from "@/components/icons/GitHub.astro"
 import ExternalLinkIcon from "@/components/icons/ExternalLink.astro"
 import LinkButton from "@/components/LinkButton.astro"
 import BeforeAfterMigration from "@/components/BeforeAfterMigration.astro"
+import TerminalCard from "@/components/TerminalCard.astro"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -135,6 +136,16 @@ const { title, summary, status, role, category, image, github, demo, stack } =
             "Java-based configuration with auto-configuration",
             "Updated dependencies with security patches applied",
           ]}
+        />
+      )
+    }
+
+    {
+      slug === "personal-portfolio" && (
+        <TerminalCard
+          title="CI/CD — quality workflow"
+          command="pnpm install --frozen-lockfile && pnpm check && pnpm build"
+          output="✓ 0 errors\n✓ 0 warnings\n✓ 12 pages built in 4.2s"
         />
       )
     }
