@@ -9,6 +9,8 @@ export const SITE_CONFIG = {
   description:
     "Ali Hamdaoui's portfolio. Full-Stack Software Engineer specializing in enterprise applications, data systems, automation, and AI-assisted modernization. Built with Astro, Tailwind CSS, and TypeScript.",
   ogImage: "/og-image.svg",
+  avatarImage: "/avatar.svg",
+  aboutImage: "/photo.svg",
   locale: "en_US",
   location: "Morocco, Rabat-Salé",
   worksFor: "Freelance & Contract",
