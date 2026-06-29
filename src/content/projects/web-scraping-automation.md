@@ -4,6 +4,8 @@ summary: "Python-based web scraping and automation toolkit using Selenium and Fa
 status: completed
 role: "Backend Developer"
 category: "Web Scraping"
+featured: false
+sortOrder: 5
 stack: ["PYTHON", "FASTAPI", "SELENIUM", "PYTEST"]
 ---
 

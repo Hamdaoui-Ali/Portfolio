@@ -21,22 +21,29 @@ validateProjectTags(
   })),
 )
 
-const PROJECTS = projectsCollection.map((project) => ({
-  slug: project.slug,
-  title: project.data.title,
-  description: project.data.summary,
-  image: project.data.image ?? null,
-  link: project.data.demo ?? null,
-  github: project.data.github ?? null,
-  featured: project.data.featured ?? false,
-  category: project.data.category,
-  tags: project.data.stack.map((key) => {
-    const tech = TECHNOLOGIES[key]
-    return tech
-      ? { ...tech, icon: TAG_ICONS[key] ?? null }
-      : { name: key, class: "bg-gray-500 text-white", icon: null }
-  }),
-}))
+const PROJECTS = projectsCollection
+  .map((project) => ({
+    slug: project.slug,
+    title: project.data.title,
+    description: project.data.summary,
+    image: project.data.image ?? null,
+    link: project.data.demo ?? null,
+    github: project.data.github ?? null,
+    featured: project.data.featured ?? false,
+    sortOrder: project.data.sortOrder ?? 99,
+    category: project.data.category,
+    tags: project.data.stack.map((key) => {
+      const tech = TECHNOLOGIES[key]
+      return tech
+        ? { ...tech, icon: TAG_ICONS[key] ?? null }
+        : { name: key, class: "bg-gray-500 text-white", icon: null }
+    }),
+  }))
+  .sort((a, b) => {
+    if (a.featured && !b.featured) return -1
+    if (!a.featured && b.featured) return 1
+    return a.sortOrder - b.sortOrder
+  })
 ---
 
 <div class="flex flex-col gap-y-16">

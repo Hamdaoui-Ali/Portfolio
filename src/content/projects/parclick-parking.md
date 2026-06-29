@@ -4,6 +4,8 @@ summary: "Mobile-friendly parking management application for real-time space ava
 status: completed
 role: "Full-Stack Developer"
 category: "Mobile"
+featured: false
+sortOrder: 6
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL"]
 ---
 

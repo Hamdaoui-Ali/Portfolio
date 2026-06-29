@@ -4,6 +4,8 @@ summary: "Full-featured e-commerce platform with product catalog, cart, checkout
 status: completed
 role: "Full-Stack Developer"
 category: "E-commerce"
+featured: false
+sortOrder: 7
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL"]
 ---
 

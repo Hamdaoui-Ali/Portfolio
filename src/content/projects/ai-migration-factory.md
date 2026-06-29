@@ -5,6 +5,8 @@ status: completed
 role: "Full-Stack Developer"
 category: "AI"
 github: "https://github.com/Hamdaoui-Ali/ai-migration-factory"
+featured: true
+sortOrder: 1
 stack: ["PYTHON", "DJANGO", "DOCKER", "PYTEST"]
 ---
 

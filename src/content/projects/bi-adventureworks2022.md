@@ -4,6 +4,8 @@ summary: "End-to-end business intelligence solution using SQL Server, SSIS, SSAS
 status: completed
 role: "BI Developer"
 category: "BI & Data"
+featured: true
+sortOrder: 4
 stack: ["SQL_SERVER", "SSIS", "SSAS", "POWER_BI"]
 ---
 

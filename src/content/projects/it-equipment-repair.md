@@ -4,6 +4,8 @@ summary: "Internal system for managing IT equipment repairs, tracking service hi
 status: completed
 role: "Full-Stack Developer"
 category: "Full-Stack"
+featured: false
+sortOrder: 8
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 

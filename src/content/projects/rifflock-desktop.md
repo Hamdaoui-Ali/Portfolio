@@ -5,6 +5,8 @@ status: completed
 role: "Full-Stack Developer"
 category: "Desktop"
 github: "https://github.com/Hamdaoui-Ali/rifflock-desktop"
+featured: true
+sortOrder: 2
 stack: ["JAVA", "SPRING_BOOT", "MYSQL", "JUNIT"]
 ---
 

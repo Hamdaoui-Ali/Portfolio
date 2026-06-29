@@ -5,6 +5,8 @@ status: completed
 role: "Backend Developer"
 category: "Full-Stack"
 github: "https://github.com/Hamdaoui-Ali/smart-solutions"
+featured: false
+sortOrder: 10
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 

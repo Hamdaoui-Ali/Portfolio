@@ -4,6 +4,8 @@ summary: "Enterprise resource planning system designed for supermarket operation
 status: completed
 role: "Full-Stack Developer"
 category: "ERP"
+featured: true
+sortOrder: 3
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 
