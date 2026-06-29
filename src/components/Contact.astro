@@ -1,0 +1,81 @@
+---
+import MailIcon from "@/components/icons/Mail.astro"
+import GitHubIcon from "@/components/icons/GitHub.astro"
+import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+import { SITE_CONFIG } from "@/data/site"
+
+const CHANNELS = [
+  {
+    label: "Email",
+    value: SITE_CONFIG.email,
+    href: `mailto:${SITE_CONFIG.email}`,
+    icon: MailIcon,
+    description: "Get in touch directly",
+  },
+  {
+    label: "GitHub",
+    value: `github.com/${SITE_CONFIG.githubHandle}`,
+    href: SITE_CONFIG.githubUrl,
+    icon: GitHubIcon,
+    description: "View my open-source work",
+  },
+  {
+    label: "LinkedIn",
+    value: `linkedin.com/in/${SITE_CONFIG.linkedInHandle}`,
+    href: SITE_CONFIG.linkedInUrl,
+    icon: LinkedInIcon,
+    description: "Connect professionally",
+  },
+  {
+    label: "Location",
+    value: SITE_CONFIG.location,
+    href: null,
+    icon: null,
+    description: "Based in",
+  },
+]
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+  {
+    CHANNELS.map((channel) => {
+      const Icon = channel.icon
+      const content = (
+        <>
+          {Icon && <Icon class="size-5 shrink-0" />}
+          <div class="min-w-0">
+            <p class="text-xs text-gray-500 dark:text-gray-500">
+              {channel.description}
+            </p>
+            <p class="font-medium text-gray-800 dark:text-white truncate">
+              {channel.value}
+            </p>
+          </div>
+        </>
+      )
+
+      if (channel.href) {
+        return (
+          <a
+            href={channel.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 hover:border-yellow-400/40 dark:hover:border-yellow-400/30 transition-colors"
+            aria-label={`${channel.label}: ${channel.value}`}
+          >
+            {content}
+          </a>
+        )
+      }
+
+      return (
+        <div
+          class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60"
+          aria-label={`${channel.label}: ${channel.value}`}
+        >
+          {content}
+        </div>
+      )
+    })
+  }
+</div>
