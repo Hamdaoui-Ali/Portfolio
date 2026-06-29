@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
-    "@astrojs/sitemap": "^3.5.0",
+    "@astrojs/sitemap": "3.5.0",
     "@astrojs/tailwind": "5.1.5",
     "@fontsource-variable/onest": "5.0.2",
     "astro": "4.16.19",
@@ -24,7 +24,7 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
-    "prettier": "^3.9.1",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier": "3.9.1",
+    "prettier-plugin-astro": "0.14.1"
   }
 }
