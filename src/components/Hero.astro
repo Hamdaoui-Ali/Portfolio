@@ -1,5 +1,4 @@
 ---
-const personalImageAlt = "Ali Hamdaoui"
 import Badge from "@/components/Badge.astro"
 import GitHubIcon from "@/components/icons/GitHub.astro"
 import LinkedInIcon from "@/components/icons/LinkedIn.astro"
@@ -21,7 +20,7 @@ import { SITE_CONFIG } from "@/data/site"
       <img
         class="relative rounded-full shadow-2xl size-20 ring-2 ring-yellow-400/60 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-950"
         src="/avatar.svg"
-        alt={`Portrait of ${personalImageAlt}`}
+        alt={`Portrait of ${SITE_CONFIG.author}`}
       />
     </div>
     <a
@@ -44,8 +43,8 @@ import { SITE_CONFIG } from "@/data/site"
     class="anim-fade-in anim-delay-2 mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
     Full-Stack Software Engineer. <strong
-      >Specialized in modern web development</strong
-    >. Building high-performance web applications from Morocco, Rabat-Salé 🇲🇦.
+      >Enterprise applications, data systems, and automation</strong
+    >. Building robust, scalable software from Morocco, Rabat-Salé 🇲🇦.
   </p>
 
   <nav
