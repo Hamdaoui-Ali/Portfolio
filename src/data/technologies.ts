@@ -246,7 +246,7 @@ export function getTechnology(key: string): Technology | undefined {
 }
 
 export function validateProjectTags(
-  projects: { title: string; tags: string[] }[]
+  projects: { title: string; tags: string[] }[],
 ): void {
   const allKeys = Object.keys(TECHNOLOGIES)
   let hasErrors = false
@@ -256,7 +256,7 @@ export function validateProjectTags(
       if (!TECHNOLOGIES[tag]) {
         console.error(
           `[technologies] Unknown technology key "${tag}" in project "${project.title}". ` +
-            `Valid keys: ${allKeys.join(", ")}`
+            `Valid keys: ${allKeys.join(", ")}`,
         )
         hasErrors = true
       }
@@ -265,7 +265,7 @@ export function validateProjectTags(
 
   if (hasErrors) {
     throw new Error(
-      "Invalid technology keys found in project data. See errors above for details."
+      "Invalid technology keys found in project data. See errors above for details.",
     )
   }
 }

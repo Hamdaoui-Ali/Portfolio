@@ -9,6 +9,7 @@ import LinkButton from "@/components/LinkButton.astro"
 import BeforeAfterMigration from "@/components/BeforeAfterMigration.astro"
 import TerminalCard from "@/components/TerminalCard.astro"
 import CodeDiffCard from "@/components/CodeDiffCard.astro"
+import { SPRING_BOOT_BEFORE, SPRING_BOOT_AFTER } from "@/data/code-samples"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -30,11 +31,7 @@ const { title, summary, status, role, category, image, github, demo, stack } =
   project.data
 ---
 
-<Layout
-  title={`${title} — Ali Hamdaoui`}
-  description={summary}
-  image={image}
->
+<Layout title={`${title} — Ali Hamdaoui`} description={summary} image={image}>
   <SectionContainer class="py-24 md:py-36">
     <nav class="mb-8">
       <a
@@ -83,18 +80,20 @@ const { title, summary, status, role, category, image, github, demo, stack } =
         Technology Stack
       </h2>
       <ul class="flex flex-row flex-wrap gap-2">
-        {stack.map((key) => {
-          const tech = TECHNOLOGIES[key]
-          return (
-            <li>
-              <span
-                class={`flex gap-x-2 rounded-full text-xs ${tech?.class ?? "bg-gray-500 text-white"} py-1 px-2`}
-              >
-                {tech?.name ?? key}
-              </span>
-            </li>
-          )
-        })}
+        {
+          stack.map((key) => {
+            const tech = TECHNOLOGIES[key]
+            return (
+              <li>
+                <span
+                  class={`flex gap-x-2 rounded-full text-xs ${tech?.class ?? "bg-gray-500 text-white"} py-1 px-2`}
+                >
+                  {tech?.name ?? key}
+                </span>
+              </li>
+            )
+          })
+        }
       </ul>
     </div>
 
@@ -119,51 +118,33 @@ const { title, summary, status, role, category, image, github, demo, stack } =
 
     {
       slug === "ai-migration-factory" && (
-        <BeforeAfterMigration
-          context="Migration example: modernizing a Java + Spring Boot application"
-          beforeTitle="Legacy Stack"
-          beforeItems={[
-            "Java 8 runtime",
-            "Spring Boot 2.x",
-            "JUnit 4 test framework",
-            "XML-based configuration",
-            "Legacy dependency versions with known CVEs",
-          ]}
-          afterTitle="Modernized Stack"
-          afterItems={[
-            "Java 21 LTS runtime",
-            "Spring Boot 3.x with native compilation support",
-            "JUnit 5 with parameterized test support",
-            "Java-based configuration with auto-configuration",
-            "Updated dependencies with security patches applied",
-          ]}
-        />
-        <CodeDiffCard
-          title="Spring Boot Upgrade Example"
-          context="Automated dependency and configuration transformation"
-          beforeCode={`<parent>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-parent</artifactId>
-  <version>2.7.18</version>
-</parent>
-
-<dependency>
-  <groupId>junit</groupId>
-  <artifactId>junit</artifactId>
-  <version>4.13.2</version>
-</dependency>`}
-          afterCode={`<parent>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-parent</artifactId>
-  <version>3.3.0</version>
-</parent>
-
-<dependency>
-  <groupId>org.junit.jupiter</groupId>
-  <artifactId>junit-jupiter</artifactId>
-  <version>5.10.2</version>
-</dependency>`}
-        />
+        <>
+          <BeforeAfterMigration
+            context="Migration example: modernizing a Java + Spring Boot application"
+            beforeTitle="Legacy Stack"
+            beforeItems={[
+              "Java 8 runtime",
+              "Spring Boot 2.x",
+              "JUnit 4 test framework",
+              "XML-based configuration",
+              "Legacy dependency versions with known CVEs",
+            ]}
+            afterTitle="Modernized Stack"
+            afterItems={[
+              "Java 21 LTS runtime",
+              "Spring Boot 3.x with native compilation support",
+              "JUnit 5 with parameterized test support",
+              "Java-based configuration with auto-configuration",
+              "Updated dependencies with security patches applied",
+            ]}
+          />
+          <CodeDiffCard
+            title="Spring Boot Upgrade Example"
+            context="Automated dependency and configuration transformation"
+            beforeCode={SPRING_BOOT_BEFORE}
+            afterCode={SPRING_BOOT_AFTER}
+          />
+        </>
       )
     }
 

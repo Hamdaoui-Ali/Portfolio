@@ -9,7 +9,9 @@
     "build": "astro check && astro build",
     "check": "astro check",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -19,5 +21,9 @@
     "astro-robots-txt": "1.0.0",
     "tailwindcss": "3.4.17",
     "typescript": "5.9.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

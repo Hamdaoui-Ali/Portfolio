@@ -38,10 +38,18 @@ const navItems = NAV_ITEMS
         if (entry.isIntersecting) {
           navItems.forEach((item) => {
             if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-yellow-500", "dark:text-yellow-400", "bg-yellow-400/10")
+              item.classList.add(
+                "text-yellow-500",
+                "dark:text-yellow-400",
+                "bg-yellow-400/10",
+              )
               item.classList.remove("text-gray-600", "dark:text-gray-300")
             } else {
-              item.classList.remove("text-yellow-500", "dark:text-yellow-400", "bg-yellow-400/10")
+              item.classList.remove(
+                "text-yellow-500",
+                "dark:text-yellow-400",
+                "bg-yellow-400/10",
+              )
               item.classList.add("text-gray-600", "dark:text-gray-300")
             }
           })

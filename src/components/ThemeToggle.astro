@@ -82,19 +82,25 @@ const THEMES = ["Light", "Dark", "System"]
   let remove: (() => void) | null = null
   const matchMedia = window.matchMedia("(prefers-color-scheme: dark)")
   const themesMenu = document.getElementById("themes-menu") as HTMLDivElement
-  const toggleBtn = document.getElementById("theme-toggle-btn") as HTMLButtonElement
+  const toggleBtn = document.getElementById(
+    "theme-toggle-btn",
+  ) as HTMLButtonElement
 
   const getThemePreference = (): ThemePreference => {
     if (typeof localStorage !== "undefined") {
-      return (localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference) ?? SYSTEM
+      return (
+        (localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference) ?? SYSTEM
+      )
     }
     return matchMedia.matches ? DARK : LIGHT
   }
 
   const updateIcon = (themePreference: ThemePreference): void => {
-    document.querySelectorAll<HTMLElement>(".theme-toggle-icon").forEach((element) => {
-      element.style.scale = element.id === themePreference ? "1" : "0"
-    })
+    document
+      .querySelectorAll<HTMLElement>(".theme-toggle-icon")
+      .forEach((element) => {
+        element.style.scale = element.id === themePreference ? "1" : "0"
+      })
   }
 
   const updateAria = (open: boolean): void => {
@@ -146,57 +152,77 @@ const THEMES = ["Light", "Dark", "System"]
 
     document.addEventListener("click", () => closeMenu(), { signal })
 
-    toggleBtn?.addEventListener("click", (e) => {
-      e.stopPropagation()
-      if (themesMenu.classList.contains("open")) {
-        closeMenu()
-      } else {
-        openMenu()
-      }
-    }, { signal })
+    toggleBtn?.addEventListener(
+      "click",
+      (e) => {
+        e.stopPropagation()
+        if (themesMenu.classList.contains("open")) {
+          closeMenu()
+        } else {
+          openMenu()
+        }
+      },
+      { signal },
+    )
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeMenu()
-        toggleBtn?.focus()
-      }
-    }, { signal })
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Escape") {
+          closeMenu()
+          toggleBtn?.focus()
+        }
+      },
+      { signal },
+    )
 
-    themesMenu.addEventListener("keydown", (e) => {
-      const items = Array.from(
-        themesMenu.querySelectorAll<HTMLElement>('[role="menuitem"]')
-      )
-      const current = document.activeElement as HTMLElement
-      const index = items.indexOf(current)
+    themesMenu.addEventListener(
+      "keydown",
+      (e) => {
+        const items = Array.from(
+          themesMenu.querySelectorAll<HTMLElement>('[role="menuitem"]'),
+        )
+        const current = document.activeElement as HTMLElement
+        const index = items.indexOf(current)
 
-      if (e.key === "ArrowDown") {
-        e.preventDefault()
-        const next = items[(index + 1) % items.length]
-        next?.focus()
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault()
-        const prev = items[(index - 1 + items.length) % items.length]
-        prev?.focus()
-      }
-    }, { signal })
+        if (e.key === "ArrowDown") {
+          e.preventDefault()
+          const next = items[(index + 1) % items.length]
+          next?.focus()
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault()
+          const prev = items[(index - 1 + items.length) % items.length]
+          prev?.focus()
+        }
+      },
+      { signal },
+    )
 
-    document.querySelectorAll<HTMLElement>('[role="menuitem"]').forEach((element) => {
-      element.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement
-        const theme = target.innerText.toLowerCase().trim() as ThemePreference
-        localStorage.setItem(THEME_STORAGE_KEY, theme)
-        updateTheme()
-        closeMenu()
-        toggleBtn?.focus()
-      }, { signal })
-    })
+    document
+      .querySelectorAll<HTMLElement>('[role="menuitem"]')
+      .forEach((element) => {
+        element.addEventListener(
+          "click",
+          (e) => {
+            const target = e.target as HTMLElement
+            const theme = target.innerText
+              .toLowerCase()
+              .trim() as ThemePreference
+            localStorage.setItem(THEME_STORAGE_KEY, theme)
+            updateTheme()
+            closeMenu()
+            toggleBtn?.focus()
+          },
+          { signal },
+        )
+      })
   }
 
   attachListeners()
 
-  document.addEventListener('astro:after-swap', () => {
-    updateTheme();
-    attachListeners();
-    window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+  document.addEventListener("astro:after-swap", () => {
+    updateTheme()
+    attachListeners()
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   })
 </script>

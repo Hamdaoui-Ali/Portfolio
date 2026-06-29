@@ -1,15 +1,15 @@
 ---
-import "@fontsource-variable/onest";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { ViewTransitions } from "astro:transitions";
-import { SITE_CONFIG } from "../data/site";
+import "@fontsource-variable/onest"
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+import { ViewTransitions } from "astro:transitions"
+import { SITE_CONFIG } from "../data/site"
 
 interface Props {
-  title: string;
-  description: string;
-  image?: string;
-  canonical?: string;
+  title: string
+  description: string
+  image?: string
+  canonical?: string
 }
 
 const {
@@ -17,26 +17,23 @@ const {
   title,
   image = SITE_CONFIG.ogImage,
   canonical = Astro.url.href,
-} = Astro.props;
+} = Astro.props
 
-const siteUrl = SITE_CONFIG.url;
-const ogImage = new URL(image, siteUrl).toString();
+const siteUrl = SITE_CONFIG.url
+const ogImage = new URL(image, siteUrl).toString()
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: SITE_CONFIG.author,
   url: siteUrl,
-  sameAs: [
-    SITE_CONFIG.linkedInUrl,
-    SITE_CONFIG.githubUrl,
-  ],
+  sameAs: [SITE_CONFIG.linkedInUrl, SITE_CONFIG.githubUrl],
   jobTitle: "Full-Stack Software Engineer",
   worksFor: {
     "@type": "Organization",
     name: "Freelance",
   },
-};
+}
 ---
 
 <!doctype html>
@@ -71,10 +68,7 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
 
     <!-- JSON-LD structured data -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(jsonLd)}
-    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
@@ -184,10 +178,18 @@ const jsonLd = {
       .anim-fade-in {
         animation: fade-in-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
       }
-      .anim-delay-1 { animation-delay: 120ms; }
-      .anim-delay-2 { animation-delay: 260ms; }
-      .anim-delay-3 { animation-delay: 400ms; }
-      .anim-delay-4 { animation-delay: 540ms; }
+      .anim-delay-1 {
+        animation-delay: 120ms;
+      }
+      .anim-delay-2 {
+        animation-delay: 260ms;
+      }
+      .anim-delay-3 {
+        animation-delay: 400ms;
+      }
+      .anim-delay-4 {
+        animation-delay: 540ms;
+      }
 
       /* Gradient text utility for the hero name */
       .gradient-name {

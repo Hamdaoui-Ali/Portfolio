@@ -15,69 +15,65 @@ import MigrationPipeline from "@/components/MigrationPipeline.astro"
 import TitleSection from "@/components/TitleSection.astro"
 ---
 
-<Layout
-  title={SITE_CONFIG.title}
-  description={SITE_CONFIG.description}
->
+<Layout title={SITE_CONFIG.title} description={SITE_CONFIG.description}>
   <main class="px-4">
     <SectionContainer class="py-16 md:py-36">
-      <Hero>
-    </Hero>
+      <Hero />
     </SectionContainer>
     <div class="space-y-24">
-    <SectionContainer id="experience">
-      <TitleSection>
-        <Briefcase class="size-8" />
-        Work Experience
-      </TitleSection>
-      <Experience />
-    </SectionContainer>
+      <SectionContainer id="experience">
+        <TitleSection>
+          <Briefcase class="size-8" />
+          Work Experience
+        </TitleSection>
+        <Experience />
+      </SectionContainer>
 
-    <SectionContainer id="projects">
-      <TitleSection>
-        <CodeDots class="size-7" />
-        Projects
-      </TitleSection>
-      <Projects />
-    </SectionContainer>
+      <SectionContainer id="projects">
+        <TitleSection>
+          <CodeDots class="size-7" />
+          Projects
+        </TitleSection>
+        <Projects />
+      </SectionContainer>
 
-    <SectionContainer id="stack">
-      <TitleSection>
-        <CodeDots class="size-7" />
-        Stack
-      </TitleSection>
-      <TechStack />
-    </SectionContainer>
+      <SectionContainer id="stack">
+        <TitleSection>
+          <CodeDots class="size-7" />
+          Stack
+        </TitleSection>
+        <TechStack />
+      </SectionContainer>
 
-    <SectionContainer id="modernization">
-      <TitleSection>
-        <CodeDots class="size-7" />
-        Modernization Pipeline
-      </TitleSection>
-      <MigrationPipeline />
-    </SectionContainer>
+      <SectionContainer id="modernization">
+        <TitleSection>
+          <CodeDots class="size-7" />
+          Modernization Pipeline
+        </TitleSection>
+        <MigrationPipeline />
+      </SectionContainer>
 
-    <SectionContainer id="achievements">
-      <TitleSection>
-        <CodeDots class="size-7" />
-        Achievements
-      </TitleSection>
-    </SectionContainer>
+      <SectionContainer id="achievements">
+        <TitleSection>
+          <CodeDots class="size-7" />
+          Achievements
+        </TitleSection>
+      </SectionContainer>
 
-    <SectionContainer id="about">
-      <TitleSection>
-        <UserHeart class="size-8" />
-        About Me
-      </TitleSection>
-      <AboutMe />
-    </SectionContainer>
+      <SectionContainer id="about">
+        <TitleSection>
+          <UserHeart class="size-8" />
+          About Me
+        </TitleSection>
+        <AboutMe />
+      </SectionContainer>
 
-    <SectionContainer id="contact">
-      <TitleSection>
-        <UserHeart class="size-8" />
-        Contact
-      </TitleSection>
-    </SectionContainer>
-  </div>
+      <SectionContainer id="contact">
+        <TitleSection>
+          <UserHeart class="size-8" />
+          Contact
+        </TitleSection>
+      </SectionContainer>
+    </div>
   </main>
 </Layout>

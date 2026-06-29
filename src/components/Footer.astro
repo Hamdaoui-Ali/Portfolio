@@ -10,17 +10,23 @@ const currentYear = new Date().getFullYear()
   <div
     class="rounded-lg w-full max-w-screen-xl mx-auto md:flex md:items-center md:justify-between py-4 flex flex-col md:flex-row items-center gap-4"
   >
-    <span class="text-sm text-center text-pretty md:text-left text-zinc-800/90 dark:text-zinc-200/90"
+    <span
+      class="text-sm text-center text-pretty md:text-left text-zinc-800/90 dark:text-zinc-200/90"
       >&copy; {currentYear}
-      <a href={SITE_CONFIG.githubUrl} class="hover:underline">Ali Hamdaoui</a>. Made with <HeartFilled class="size-3.5 text-red-500 inline" aria-label="love" /> Almost
-      all rights reserved
+      <a href={SITE_CONFIG.githubUrl} class="hover:underline">Ali Hamdaoui</a>.
+      Made with <HeartFilled
+        class="size-3.5 text-red-500 inline"
+        aria-label="love"
+      /> Almost all rights reserved
     </span>
     <ul
       class="flex flex-wrap items-center text-sm font-medium dark:text-white/90"
     >
       <li>
-        <a id="contact" href={`mailto:${SITE_CONFIG.email}`} class="hover:underline"
-          >Contact</a
+        <a
+          id="contact"
+          href={`mailto:${SITE_CONFIG.email}`}
+          class="hover:underline">Contact</a
         >
       </li>
     </ul>

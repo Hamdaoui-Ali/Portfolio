@@ -12,7 +12,16 @@ const STACK_GROUPS = [
   },
   {
     title: "Data & BI",
-    keys: ["SQL_SERVER", "SSIS", "SSAS", "POWER_BI", "MYSQL", "POSTGRESQL", "SQLITE", "MONGODB"],
+    keys: [
+      "SQL_SERVER",
+      "SSIS",
+      "SSAS",
+      "POWER_BI",
+      "MYSQL",
+      "POSTGRESQL",
+      "SQLITE",
+      "MONGODB",
+    ],
   },
   {
     title: "Automation & Testing",
@@ -32,9 +41,7 @@ const STACK_GROUPS = [
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {
     STACK_GROUPS.map((group) => {
-      const techs = group.keys
-        .map((key) => TECHNOLOGIES[key])
-        .filter(Boolean)
+      const techs = group.keys.map((key) => TECHNOLOGIES[key]).filter(Boolean)
 
       return (
         <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-5 bg-white/60 dark:bg-gray-900/60">

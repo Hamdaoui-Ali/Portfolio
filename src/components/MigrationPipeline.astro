@@ -1,12 +1,37 @@
 ---
 const STEPS = [
-  { label: "Analyze legacy code", description: "Scan and map existing codebase structure, dependencies, and patterns" },
-  { label: "Identify risks", description: "Detect compatibility issues, deprecated APIs, and breaking changes" },
-  { label: "Plan migration", description: "Design incremental migration strategy with rollback checkpoints" },
-  { label: "Human review", description: "Engineer-led validation of AI-generated migration proposals" },
-  { label: "Transform safely", description: "Apply automated refactoring with guardrails and validation" },
-  { label: "Build & test", description: "Compile, run test suites, and verify all integrations pass" },
-  { label: "Document result", description: "Generate reports with before/after metrics and lessons learned" },
+  {
+    label: "Analyze legacy code",
+    description:
+      "Scan and map existing codebase structure, dependencies, and patterns",
+  },
+  {
+    label: "Identify risks",
+    description:
+      "Detect compatibility issues, deprecated APIs, and breaking changes",
+  },
+  {
+    label: "Plan migration",
+    description:
+      "Design incremental migration strategy with rollback checkpoints",
+  },
+  {
+    label: "Human review",
+    description: "Engineer-led validation of AI-generated migration proposals",
+  },
+  {
+    label: "Transform safely",
+    description: "Apply automated refactoring with guardrails and validation",
+  },
+  {
+    label: "Build & test",
+    description: "Compile, run test suites, and verify all integrations pass",
+  },
+  {
+    label: "Document result",
+    description:
+      "Generate reports with before/after metrics and lessons learned",
+  },
 ]
 ---
 
@@ -17,9 +42,7 @@ const STEPS = [
       STEPS.map((step, i) => (
         <div class="flex items-start flex-1 min-w-0">
           <div class="flex flex-col items-center w-full">
-            <div
-              class="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400/10 border-2 border-yellow-400/40 text-yellow-500 dark:text-yellow-400 font-bold text-sm shrink-0"
-            >
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400/10 border-2 border-yellow-400/40 text-yellow-500 dark:text-yellow-400 font-bold text-sm shrink-0">
               {i + 1}
             </div>
             <p class="mt-3 text-sm font-semibold text-gray-800 dark:text-white text-center leading-tight">
@@ -31,8 +54,8 @@ const STEPS = [
           </div>
           {i < STEPS.length - 1 && (
             <div class="flex items-center pt-5 shrink-0 mx-0.5">
-              <div class="w-6 h-px bg-yellow-400/40"></div>
-              <div class="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[5px] border-l-yellow-400/60"></div>
+              <div class="w-6 h-px bg-yellow-400/40" />
+              <div class="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[5px] border-l-yellow-400/60" />
             </div>
           )}
         </div>
@@ -46,13 +69,11 @@ const STEPS = [
       STEPS.map((step, i) => (
         <div class="flex gap-4">
           <div class="flex flex-col items-center shrink-0">
-            <div
-              class="flex items-center justify-center w-9 h-9 rounded-full bg-yellow-400/10 border-2 border-yellow-400/40 text-yellow-500 dark:text-yellow-400 font-bold text-xs shrink-0"
-            >
+            <div class="flex items-center justify-center w-9 h-9 rounded-full bg-yellow-400/10 border-2 border-yellow-400/40 text-yellow-500 dark:text-yellow-400 font-bold text-xs shrink-0">
               {i + 1}
             </div>
             {i < STEPS.length - 1 && (
-              <div class="w-px h-8 bg-yellow-400/20 my-1"></div>
+              <div class="w-px h-8 bg-yellow-400/20 my-1" />
             )}
           </div>
           <div class="pb-6">
