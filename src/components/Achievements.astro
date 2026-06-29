@@ -1,0 +1,48 @@
+---
+const ACHIEVEMENTS = [
+  {
+    title: "1st Place",
+    event: "ERC EMSI Robotics Competition",
+    description: "First-place winner in autonomous robotics challenge involving path planning, object detection, and real-time decision making.",
+  },
+  {
+    title: "2nd Place",
+    event: "Moroccan Robotics Newbie Contest",
+    description: "Second-place finish in national robotics competition for emerging talent, with a custom-built robot navigating complex terrains.",
+  },
+  {
+    title: "3rd Place",
+    event: "Moroccan Robotics Challenge",
+    description: "Third-place finish in a multi-round robotics contest testing mechanical design, sensor integration, and software control systems.",
+  },
+]
+---
+
+<div class="space-y-8">
+  {
+    ACHIEVEMENTS.map((achievement, i) => (
+      <div class="flex gap-5">
+        <div class="relative flex flex-col items-center shrink-0">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400/10 border-2 border-yellow-400/40"
+          >
+            <span class="text-yellow-500 dark:text-yellow-400 font-bold text-sm">
+              {["🥇", "🥈", "🥉"][i]}
+            </span>
+          </div>
+          {i < ACHIEVEMENTS.length - 1 && (
+            <div class="w-px h-full bg-yellow-400/20 mt-2"></div>
+          )}
+        </div>
+        <div class="pb-8">
+          <h3 class="font-semibold text-gray-800 dark:text-white">
+            {achievement.title} — {achievement.event}
+          </h3>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            {achievement.description}
+          </p>
+        </div>
+      </div>
+    ))
+  }
+</div>
