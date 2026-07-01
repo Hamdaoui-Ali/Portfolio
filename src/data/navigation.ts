@@ -1,5 +1,3 @@
-import { SITE_CONFIG } from "./site"
-
 export interface NavItem {
   title: string
   label: string
@@ -35,6 +33,6 @@ export const NAV_ITEMS: NavItem[] = [
   {
     title: "Contact",
     label: "contact",
-    url: `mailto:${SITE_CONFIG.email}`,
+    url: "/#contact",
   },
 ]

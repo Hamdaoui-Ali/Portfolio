@@ -30,52 +30,104 @@ const navItems = NAV_ITEMS
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
+    const previousController = (window as any).__headerNavController as
+      AbortController | undefined
+    previousController?.abort()
 
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add(
-                "text-yellow-500",
-                "dark:text-yellow-400",
-                "bg-yellow-400/10",
-              )
-              item.classList.remove("text-gray-700", "dark:text-white")
-            } else {
-              item.classList.remove(
-                "text-yellow-500",
-                "dark:text-yellow-400",
-                "bg-yellow-400/10",
-              )
-              item.classList.add("text-gray-700", "dark:text-white")
-            }
-          })
+    const controller = new AbortController()
+    ;(window as any).__headerNavController = controller
+
+    const navItems = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("header nav a[aria-label]"),
+    )
+    const navLabels = new Set(navItems.map((item) => item.ariaLabel))
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("section[id]"),
+    ).filter((section) => navLabels.has(section.id))
+
+    const activeClasses = [
+      "text-yellow-500",
+      "dark:text-yellow-400",
+      "bg-yellow-400/10",
+    ]
+    const inactiveClasses = ["text-gray-700", "dark:text-white"]
+
+    const setActiveNavItem = (sectionId: string): void => {
+      navItems.forEach((item) => {
+        const isActive = item.ariaLabel === sectionId
+
+        item.classList.toggle(activeClasses[0], isActive)
+        item.classList.toggle(activeClasses[1], isActive)
+        item.classList.toggle(activeClasses[2], isActive)
+        item.classList.toggle(inactiveClasses[0], !isActive)
+        item.classList.toggle(inactiveClasses[1], !isActive)
+      })
+    }
+
+    const getActiveSectionId = (): string | undefined => {
+      const isNearPageBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 4
+
+      if (isNearPageBottom) {
+        return sections.at(-1)?.id
+      }
+
+      const marker = Math.min(window.innerHeight * 0.35, 260)
+      let activeSectionId = sections[0]?.id
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect()
+
+        if (rect.top <= marker) {
+          activeSectionId = section.id
+        }
+
+        if (rect.top <= marker && rect.bottom > marker) {
+          return section.id
+        }
+      }
+
+      return activeSectionId
+    }
+
+    let rafId = 0
+    const updateActiveNavItem = (): void => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const activeSectionId = getActiveSectionId()
+
+        if (activeSectionId) {
+          setActiveNavItem(activeSectionId)
         }
       })
     }
 
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
+    navItems.forEach((item) => {
+      item.addEventListener(
+        "click",
+        () => {
+          const href = item.getAttribute("href")
+          const hash = href?.startsWith("/#") ? href.slice(2) : undefined
+
+          if (hash && navLabels.has(hash)) {
+            setActiveNavItem(hash)
+          }
+        },
+        { signal: controller.signal },
+      )
     })
 
-    sections.forEach((section) => {
-      observer.observe(section)
+    updateActiveNavItem()
+    window.addEventListener("scroll", updateActiveNavItem, {
+      passive: true,
+      signal: controller.signal,
     })
-
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
-    }
+    window.addEventListener("resize", updateActiveNavItem, {
+      signal: controller.signal,
+    })
+    window.addEventListener("hashchange", updateActiveNavItem, {
+      signal: controller.signal,
+    })
   })
 </script>
 
