@@ -4,6 +4,7 @@ import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import { ViewTransitions } from "astro:transitions"
 import { SITE_CONFIG } from "../data/site"
+import SpeedInsights from "@vercel/speed-insights/astro"
 
 interface Props {
   title: string
@@ -218,5 +219,6 @@ const jsonLd = {
         }
       }
     </style>
+    <SpeedInsights />
   </body>
 </html>
