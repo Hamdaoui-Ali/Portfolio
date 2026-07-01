@@ -9,7 +9,7 @@ const navItems = NAV_ITEMS
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-4"
 >
   <nav
-    class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full text-gray-600 dark:text-gray-300 justify-center items-center border border-transparent"
+    class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full text-gray-700 dark:text-white justify-center items-center"
   >
     {
       navItems.map((link) => (
@@ -43,14 +43,14 @@ const navItems = NAV_ITEMS
                 "dark:text-yellow-400",
                 "bg-yellow-400/10",
               )
-              item.classList.remove("text-gray-600", "dark:text-gray-300")
+              item.classList.remove("text-gray-700", "dark:text-white")
             } else {
               item.classList.remove(
                 "text-yellow-500",
                 "dark:text-yellow-400",
                 "bg-yellow-400/10",
               )
-              item.classList.add("text-gray-600", "dark:text-gray-300")
+              item.classList.add("text-gray-700", "dark:text-white")
             }
           })
         }
@@ -85,19 +85,24 @@ const navItems = NAV_ITEMS
     animation-timeline: scroll();
     animation-range: 0 100px;
 
-    --nav-bg-to: rgba(255, 255, 255, 0.6);
-    --nav-border-to: rgba(229, 231, 235, 0.2);
-    --nav-ring-to: rgba(255, 255, 255, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.82);
+    --nav-border: rgba(17, 24, 39, 0.12);
+    --nav-shadow:
+      0 10px 28px -18px rgba(17, 24, 39, 0.45),
+      0 1px 0 rgba(255, 255, 255, 0.8) inset;
+
+    background-color: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    box-shadow: var(--nav-shadow);
+    backdrop-filter: blur(14px);
   }
 
-  .dark .header-nav {
-    --nav-bg-to: rgba(17, 24, 39, 0.8);
-    --nav-border-to: rgba(255, 255, 255, 0.05);
-    --nav-ring-to: rgba(255, 255, 255, 0.05);
-  }
-
-  .header-nav {
-    @apply dark:bg-gray-900/80 bg-white/60;
+  :global(.dark) .header-nav {
+    --nav-bg: rgba(3, 7, 18, 0.86);
+    --nav-border: rgba(255, 255, 255, 0.16);
+    --nav-shadow:
+      0 14px 34px -18px rgba(0, 0, 0, 0.9),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   }
 
   .nav-link.text-yellow-500 {
@@ -106,19 +111,16 @@ const navItems = NAV_ITEMS
 
   @keyframes nav-appear {
     0% {
-      background-color: transparent;
-      border-color: transparent;
-      box-shadow: none;
-      backdrop-filter: none;
+      background-color: var(--nav-bg);
+      border-color: var(--nav-border);
+      box-shadow: var(--nav-shadow);
+      backdrop-filter: blur(10px);
     }
     to {
-      background-color: var(--nav-bg-to);
-      box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -4px rgba(0, 0, 0, 0.1),
-        0 0 0 1px var(--nav-ring-to);
+      background-color: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
       backdrop-filter: blur(12px);
-      border-color: var(--nav-border-to);
+      border-color: var(--nav-border);
     }
   }
 </style>
