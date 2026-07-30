@@ -22,3 +22,7 @@ pnpm-debug.log*
 bun.*
 
 package-lock.json
+
+# local Codex/Superpowers execution artifacts
+.superpowers/
+.worktrees/
