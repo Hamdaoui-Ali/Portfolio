@@ -63,13 +63,16 @@ pnpm check
 # Run formatting check
 pnpm format:check
 
+# Run portfolio content and accessibility contract checks
+pnpm test:portfolio
+
 # Production build
 pnpm build
 ```
 
 ## Deployment
 
-This portfolio is configured for automatic deployment on Vercel via the `vercel.json` configuration. The GitHub Actions quality workflow runs on every push and pull request to `main`, checking types, formatting, and the production build before deployment.
+This portfolio is configured for automatic deployment on Vercel via the `vercel.json` configuration. The GitHub Actions quality workflow runs on every push and pull request to `main`, checking formatting, portfolio content facts, types, and the production build before deployment.
 
 ## Project Structure
 
@@ -93,4 +96,4 @@ This portfolio is built on a template originally created by [midudev](https://gi
 
 ## License
 
-[CC BY-NC 4.0](LICENSE.md)
+This repository currently does not include a license file. Contact Ali before reusing the content or design.
