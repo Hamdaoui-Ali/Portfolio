@@ -5,26 +5,82 @@ import { NAV_ITEMS } from "@/data/navigation"
 const navItems = NAV_ITEMS
 ---
 
-<header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-4"
->
-  <nav
-    class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full text-gray-700 dark:text-white justify-center items-center"
+<header class="fixed top-0 z-10 mt-4 w-full px-4">
+  <div
+    class="header-nav mx-auto flex w-full max-w-4xl items-center justify-between gap-3 rounded-full px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-white"
   >
-    {
-      navItems.map((link) => (
-        <a
-          class="nav-link relative text-xs sm:text-sm block px-1.5 sm:px-3 py-2 sm:py-1.5 rounded-full transition-colors duration-200 hover:text-yellow-500 dark:hover:text-yellow-400"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
-    <div class="ml-2 pl-2 border-l border-gray-300/30 dark:border-white/10">
+    <a
+      href="/#main-content"
+      class="shrink-0 rounded-full px-2 py-2 text-xs font-semibold tracking-wide text-gray-800 transition hover:text-yellow-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:text-white dark:hover:text-yellow-400 dark:focus-visible:ring-offset-gray-950 sm:px-3"
+      aria-label="Ali Hamdaoui home"
+    >
+      <span class="sm:hidden">AH</span>
+      <span class="hidden sm:inline">Ali Hamdaoui</span>
+    </a>
+
+    <nav
+      id="desktop-navigation"
+      class="hidden items-center gap-x-1 sm:flex"
+      aria-label="Primary navigation"
+    >
+      {
+        navItems.map((link) => (
+          <a
+            class="nav-link relative block rounded-full px-2 py-2 text-xs transition-colors duration-200 hover:text-yellow-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:hover:text-yellow-400 dark:focus-visible:ring-offset-gray-950 sm:px-3 sm:py-1.5 sm:text-sm"
+            data-nav-link
+            data-nav-section={link.label}
+            aria-label={link.label}
+            href={link.url}
+          >
+            {link.title}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="ml-auto flex items-center gap-1">
       <ThemeToggle />
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full p-2 text-gray-700 transition hover:bg-yellow-400/10 hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:text-gray-100 dark:hover:text-yellow-300 dark:focus-visible:ring-offset-gray-950 sm:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+        aria-label="Open navigation"
+      >
+        <span class="sr-only">Open navigation</span>
+        <span aria-hidden="true" class="flex flex-col gap-1.5">
+          <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+          <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+          <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+        </span>
+      </button>
     </div>
+  </div>
+
+  <nav
+    id="mobile-navigation"
+    class="header-nav mx-auto mt-2 hidden w-full max-w-4xl rounded-2xl p-2 sm:hidden"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+  >
+    <ul class="grid gap-1">
+      {
+        navItems.map((link) => (
+          <li>
+            <a
+              class="nav-link block rounded-xl px-4 py-3 text-sm transition-colors hover:bg-yellow-400/10 hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:hover:text-yellow-300 dark:focus-visible:ring-offset-gray-950"
+              data-nav-link
+              data-nav-section={link.label}
+              aria-label={link.label}
+              href={link.url}
+            >
+              {link.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </nav>
 </header>
 
@@ -36,11 +92,67 @@ const navItems = NAV_ITEMS
 
     const controller = new AbortController()
     ;(window as any).__headerNavController = controller
+    const { signal } = controller
+
+    const header = document.querySelector("header")
+    const menuButton = document.getElementById(
+      "mobile-menu-button",
+    ) as HTMLButtonElement | null
+    const mobileNavigation = document.getElementById("mobile-navigation")
+
+    const setMobileMenu = (open: boolean): void => {
+      mobileNavigation?.classList.toggle("hidden", !open)
+      mobileNavigation?.setAttribute("aria-hidden", String(!open))
+      menuButton?.setAttribute("aria-expanded", String(open))
+      menuButton?.setAttribute(
+        "aria-label",
+        open ? "Close navigation" : "Open navigation",
+      )
+    }
+
+    menuButton?.addEventListener(
+      "click",
+      () => setMobileMenu(menuButton.getAttribute("aria-expanded") !== "true"),
+      { signal },
+    )
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          setMobileMenu(false)
+          menuButton?.focus()
+        }
+      },
+      { signal },
+    )
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("#mobile-navigation a")
+      .forEach((item) => {
+        item.addEventListener("click", () => setMobileMenu(false), { signal })
+      })
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (
+          menuButton?.getAttribute("aria-expanded") === "true" &&
+          header &&
+          !header.contains(event.target as Node)
+        ) {
+          setMobileMenu(false)
+        }
+      },
+      { signal },
+    )
 
     const navItems = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>("header nav a[aria-label]"),
+      document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
     )
-    const navLabels = new Set(navItems.map((item) => item.ariaLabel))
+    const navLabels = new Set(
+      navItems.map((item) => item.dataset.navSection).filter(Boolean),
+    )
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("section[id]"),
     ).filter((section) => navLabels.has(section.id))
@@ -54,7 +166,7 @@ const navItems = NAV_ITEMS
 
     const setActiveNavItem = (sectionId: string): void => {
       navItems.forEach((item) => {
-        const isActive = item.ariaLabel === sectionId
+        const isActive = item.dataset.navSection === sectionId
 
         item.classList.toggle(activeClasses[0], isActive)
         item.classList.toggle(activeClasses[1], isActive)
@@ -113,31 +225,24 @@ const navItems = NAV_ITEMS
             setActiveNavItem(hash)
           }
         },
-        { signal: controller.signal },
+        { signal },
       )
     })
 
+    setMobileMenu(false)
     updateActiveNavItem()
     window.addEventListener("scroll", updateActiveNavItem, {
       passive: true,
-      signal: controller.signal,
+      signal,
     })
-    window.addEventListener("resize", updateActiveNavItem, {
-      signal: controller.signal,
-    })
-    window.addEventListener("hashchange", updateActiveNavItem, {
-      signal: controller.signal,
-    })
+    window.addEventListener("resize", updateActiveNavItem, { signal })
+    window.addEventListener("hashchange", updateActiveNavItem, { signal })
   })
 </script>
 
 <style>
   .header-nav {
-    animation: nav-appear 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
-
-    --nav-bg: rgba(255, 255, 255, 0.82);
+    --nav-bg: rgba(255, 255, 255, 0.84);
     --nav-border: rgba(17, 24, 39, 0.12);
     --nav-shadow:
       0 10px 28px -18px rgba(17, 24, 39, 0.45),
@@ -150,7 +255,7 @@ const navItems = NAV_ITEMS
   }
 
   :global(.dark) .header-nav {
-    --nav-bg: rgba(3, 7, 18, 0.86);
+    --nav-bg: rgba(3, 7, 18, 0.88);
     --nav-border: rgba(255, 255, 255, 0.16);
     --nav-shadow:
       0 14px 34px -18px rgba(0, 0, 0, 0.9),
@@ -161,18 +266,9 @@ const navItems = NAV_ITEMS
     @apply font-semibold;
   }
 
-  @keyframes nav-appear {
-    0% {
-      background-color: var(--nav-bg);
-      border-color: var(--nav-border);
-      box-shadow: var(--nav-shadow);
-      backdrop-filter: blur(10px);
-    }
-    to {
-      background-color: var(--nav-bg);
-      box-shadow: var(--nav-shadow);
-      backdrop-filter: blur(12px);
-      border-color: var(--nav-border);
+  @media (prefers-reduced-motion: reduce) {
+    .header-nav {
+      transition: none;
     }
   }
 </style>

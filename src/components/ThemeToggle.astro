@@ -10,10 +10,11 @@ const THEMES = ["Light", "Dark", "System"]
   <button
     transition:persist
     id="theme-toggle-btn"
-    class="appearance-none border-none flex hover:scale-125 transition"
+    class="appearance-none border-none inline-flex size-11 items-center justify-center rounded-full p-2 transition hover:bg-yellow-400/10 hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:hover:text-yellow-300 dark:focus-visible:ring-offset-gray-950"
     aria-haspopup="menu"
     aria-expanded="false"
     aria-controls="themes-menu"
+    aria-label="Choose theme"
   >
     <span class="sr-only">Choose theme</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
@@ -31,7 +32,7 @@ const THEMES = ["Light", "Dark", "System"]
     id="themes-menu"
     role="menu"
     aria-label="Theme switcher"
-    class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
+    class="absolute right-0 top-12 hidden min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
   >
     <ul role="none">
       {
@@ -39,9 +40,11 @@ const THEMES = ["Light", "Dark", "System"]
           <li role="none">
             <button
               type="button"
-              role="menuitem"
+              role="menuitemradio"
               tabindex="-1"
-              class="themes-menu-option w-full text-left px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm"
+              data-theme={theme.toLowerCase()}
+              aria-checked="false"
+              class="themes-menu-option w-full rounded-sm px-3 py-2 text-left hover:bg-neutral-400/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:hover:bg-gray-500/50"
             >
               {theme}
             </button>
@@ -69,6 +72,12 @@ const THEMES = ["Light", "Dark", "System"]
       opacity: 1;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #themes-menu.open {
+      animation: none;
+    }
+  }
 </style>
 
 <script>
@@ -87,12 +96,13 @@ const THEMES = ["Light", "Dark", "System"]
   ) as HTMLButtonElement
 
   const getThemePreference = (): ThemePreference => {
-    if (typeof localStorage !== "undefined") {
-      return (
-        (localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference) ?? SYSTEM
-      )
+    const stored = localStorage.getItem(THEME_STORAGE_KEY)
+
+    if (stored === DARK || stored === LIGHT || stored === SYSTEM) {
+      return stored
     }
-    return matchMedia.matches ? DARK : LIGHT
+
+    return SYSTEM
   }
 
   const updateIcon = (themePreference: ThemePreference): void => {
@@ -103,11 +113,20 @@ const THEMES = ["Light", "Dark", "System"]
       })
   }
 
-  const updateAria = (open: boolean): void => {
+  const updateAria = (
+    open: boolean,
+    themePreference = getThemePreference(),
+  ): void => {
     toggleBtn.setAttribute("aria-expanded", String(open))
-    const items = themesMenu.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    const items = themesMenu.querySelectorAll<HTMLElement>(
+      '[role="menuitemradio"]',
+    )
     items.forEach((item) => {
       item.setAttribute("tabindex", open ? "0" : "-1")
+      item.setAttribute(
+        "aria-checked",
+        String(item.dataset.theme === themePreference),
+      )
     })
   }
 
@@ -119,18 +138,18 @@ const THEMES = ["Light", "Dark", "System"]
   const openMenu = (): void => {
     themesMenu.classList.add("open")
     updateAria(true)
-    const first = themesMenu.querySelector<HTMLElement>('[role="menuitem"]')
-    first?.focus()
+    const current = themesMenu.querySelector<HTMLElement>(
+      '[role="menuitemradio"][aria-checked="true"]',
+    )
+    ;(
+      current ?? themesMenu.querySelector<HTMLElement>('[role="menuitemradio"]')
+    )?.focus()
   }
 
   const updateTheme = (): void => {
-    if (remove != null) {
-      remove()
-    }
+    remove?.()
     matchMedia.addEventListener("change", updateTheme)
-    remove = () => {
-      matchMedia.removeEventListener("change", updateTheme)
-    }
+    remove = () => matchMedia.removeEventListener("change", updateTheme)
 
     const themePreference = getThemePreference()
     const isDark =
@@ -138,6 +157,7 @@ const THEMES = ["Light", "Dark", "System"]
       (themePreference === SYSTEM && matchMedia.matches)
 
     updateIcon(themePreference)
+    updateAria(themesMenu.classList.contains("open"), themePreference)
     document.documentElement.classList.toggle("dark", isDark)
   }
 
@@ -154,8 +174,8 @@ const THEMES = ["Light", "Dark", "System"]
 
     toggleBtn?.addEventListener(
       "click",
-      (e) => {
-        e.stopPropagation()
+      (event) => {
+        event.stopPropagation()
         if (themesMenu.classList.contains("open")) {
           closeMenu()
         } else {
@@ -167,8 +187,8 @@ const THEMES = ["Light", "Dark", "System"]
 
     document.addEventListener(
       "keydown",
-      (e) => {
-        if (e.key === "Escape") {
+      (event) => {
+        if (event.key === "Escape") {
           closeMenu()
           toggleBtn?.focus()
         }
@@ -178,36 +198,32 @@ const THEMES = ["Light", "Dark", "System"]
 
     themesMenu.addEventListener(
       "keydown",
-      (e) => {
+      (event) => {
         const items = Array.from(
-          themesMenu.querySelectorAll<HTMLElement>('[role="menuitem"]'),
+          themesMenu.querySelectorAll<HTMLElement>('[role="menuitemradio"]'),
         )
         const current = document.activeElement as HTMLElement
         const index = items.indexOf(current)
 
-        if (e.key === "ArrowDown") {
-          e.preventDefault()
-          const next = items[(index + 1) % items.length]
-          next?.focus()
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault()
-          const prev = items[(index - 1 + items.length) % items.length]
-          prev?.focus()
+        if (event.key === "ArrowDown") {
+          event.preventDefault()
+          items[(index + 1) % items.length]?.focus()
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault()
+          items[(index - 1 + items.length) % items.length]?.focus()
         }
       },
       { signal },
     )
 
-    document
-      .querySelectorAll<HTMLElement>('[role="menuitem"]')
+    themesMenu
+      .querySelectorAll<HTMLElement>('[role="menuitemradio"]')
       .forEach((element) => {
         element.addEventListener(
           "click",
-          (e) => {
-            const target = e.target as HTMLElement
-            const theme = target.innerText
-              .toLowerCase()
-              .trim() as ThemePreference
+          (event) => {
+            const theme = (event.currentTarget as HTMLElement).dataset
+              .theme as ThemePreference
             localStorage.setItem(THEME_STORAGE_KEY, theme)
             updateTheme()
             closeMenu()
