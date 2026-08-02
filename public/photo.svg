@@ -14,10 +14,10 @@
   <text x="200" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="64" font-weight="700" fill="#f59e0b" opacity="0.6">
     AH
   </text>
-  <text x="200" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#64748b">
-    Professional photo
+  <text x="200" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#cbd5e1" letter-spacing="2">
+    FULL-STACK ENGINEER
   </text>
-  <text x="200" y="302" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#475569">
-    coming soon
+  <text x="200" y="304" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#f59e0b" letter-spacing="1">
+    AI MODERNIZATION
   </text>
 </svg>

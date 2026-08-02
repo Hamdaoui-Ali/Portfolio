@@ -29,6 +29,8 @@ const PROJECTS = projectsCollection
     image: project.data.image ?? null,
     link: project.data.demo ?? null,
     github: project.data.github ?? null,
+    visibility: project.data.visibility ?? "public",
+    evidence: project.data.evidence ?? [],
     featured: project.data.featured ?? false,
     sortOrder: project.data.sortOrder ?? 99,
     category: project.data.category,
@@ -48,73 +50,111 @@ const PROJECTS = projectsCollection
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ slug, image, title, description, category, tags, link, github }) => (
-      <article class="flex flex-col space-x-0 space-y-6 group md:flex-row md:space-x-10 md:space-y-0">
-        {image && (
-          <div class="w-full md:w-1/2">
-            <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-[0_20px_60px_-10px_rgba(251,191,36,0.2)] lg:border lg:border-gray-800 lg:hover:border-yellow-400/30 lg:hover:bg-gray-800/50">
-              <img
-                alt={title}
-                class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-                loading="lazy"
-                src={image}
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                aria-hidden="true"
-              />
-            </div>
-          </div>
-        )}
-
-        <div
-          class={`w-full ${image ? "md:w-1/2 md:max-w-lg" : "md:max-w-xl"} flex flex-col justify-center`}
+    PROJECTS.map(
+      ({
+        slug,
+        image,
+        title,
+        description,
+        category,
+        tags,
+        link,
+        github,
+        visibility,
+        evidence,
+        featured,
+      }) => (
+        <article
+          class={`flex flex-col space-x-0 space-y-6 group md:flex-row md:space-x-10 md:space-y-0 ${featured ? "featured-project" : ""}`}
         >
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-            <a
-              href={`/projects/${slug}`}
-              class="hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
-            >
-              {title}
-            </a>
-          </h3>
-          <div class="flex flex-wrap items-center gap-2 mt-2">
-            <span class="rounded-full bg-yellow-400/10 border border-yellow-400/30 px-2.5 py-0.5 text-[11px] font-medium text-yellow-600 dark:text-yellow-400">
-              {category}
-            </span>
-          </div>
-          <ul class="flex flex-row flex-wrap mt-3 gap-2">
-            {tags.map((tag) => (
-              <li>
-                <span
-                  class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
-                >
-                  {tag.icon && <tag.icon class="size-4" />}
-                  {tag.name}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {image && (
+            <div class="w-full md:w-1/2">
+              <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-[0_20px_60px_-10px_rgba(251,191,36,0.2)] lg:border lg:border-gray-800 lg:hover:border-yellow-400/30 lg:hover:bg-gray-800/50">
+                <img
+                  alt={title}
+                  class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+                  loading="lazy"
+                  src={image}
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          )}
 
-          <p class="mt-3 text-gray-700 dark:text-gray-400 text-pretty">
-            {description}
-          </p>
-          <footer class="flex items-center mt-4 gap-x-4">
-            {github && (
-              <LinkButton href={github}>
-                <GitHub class="size-5" />
-                Code
-              </LinkButton>
+          <div
+            class={`w-full ${image ? "md:w-1/2 md:max-w-lg" : "md:max-w-xl"} flex flex-col justify-center`}
+          >
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+              <a
+                href={`/projects/${slug}`}
+                class="hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+              >
+                {title}
+              </a>
+            </h3>
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+              <span class="rounded-full bg-yellow-400/10 border border-yellow-400/30 px-2.5 py-0.5 text-[11px] font-medium text-yellow-600 dark:text-yellow-400">
+                {category}
+              </span>
+            </div>
+            <ul class="flex flex-row flex-wrap mt-3 gap-2">
+              {tags.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+                  >
+                    {tag.icon && <tag.icon class="size-4" />}
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <p class="mt-3 text-gray-700 dark:text-gray-400 text-pretty">
+              {description}
+            </p>
+            {featured && evidence.length > 0 && (
+              <div class="mt-4 rounded-xl border border-yellow-400/20 bg-yellow-400/[0.04] p-3 dark:bg-yellow-400/[0.06]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-700 dark:text-yellow-300">
+                  Evidence in the case study
+                </p>
+                <ul class="mt-2 grid gap-1 text-sm text-gray-700 dark:text-gray-300 sm:grid-cols-2">
+                  {evidence.map((item) => (
+                    <li class="flex gap-2">
+                      <span class="text-yellow-500" aria-hidden="true">
+                        →
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
-            {link && (
-              <LinkButton href={link}>
-                <ExternalLink class="size-4" />
-                Preview
-              </LinkButton>
-            )}
-          </footer>
-        </div>
-      </article>
-    ))
+            <footer class="flex items-center mt-4 gap-x-4">
+              {github && (
+                <LinkButton href={github}>
+                  <GitHub class="size-5" />
+                  Code
+                </LinkButton>
+              )}
+              {link && (
+                <LinkButton href={link}>
+                  <ExternalLink class="size-4" />
+                  Preview
+                </LinkButton>
+              )}
+              {!github && visibility === "private" && (
+                <span class="inline-flex min-h-11 items-center rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
+                  Private repository
+                </span>
+              )}
+            </footer>
+          </div>
+        </article>
+      ),
+    )
   }
 </div>
