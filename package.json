@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:portfolio": "node --test scripts/validate-portfolio.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
