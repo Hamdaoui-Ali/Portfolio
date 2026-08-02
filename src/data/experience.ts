@@ -9,42 +9,41 @@ export interface ExperienceEntry {
 
 const experience: ExperienceEntry[] = [
   {
-    date: "Jan 2025 — Present",
-    title: "Software Engineer",
+    date: "Mar 2026 — Aug 2026",
+    title: "Software Engineer — PFE Intern",
     company: "CGI",
     description:
-      "Developing and maintaining enterprise-scale applications for global clients. Working across the full stack with Java, Spring Boot, Angular, SQL Server, and cloud technologies to deliver high-quality, scalable solutions.",
+      "Lead developer for two internally validated AI Migration Factory MVPs. Built agent-orchestrated workflows, backend services, tracking UI, validation gates, reporting, and DevOps integration for incremental Java/Spring Boot and Angular modernization.",
     link: "https://www.cgi.com",
     current: true,
   },
   {
-    date: "2023 — Dec 2024",
-    title: "Software Developer",
-    company: "DXC Technology Morocco",
+    date: "Jul 2025 — Sep 2025",
+    title: "Data Analyst — Intern",
+    company: "Sofrecom Services Maroc",
     description:
-      "Contributed to enterprise IT service management projects, building and integrating web applications with Java, Spring Boot, and Angular. Collaborated on automation initiatives and system modernization efforts.",
-    link: "https://www.dxc.com",
+      "Designed and delivered an AdventureWorks2022 decision-support solution with a star-schema warehouse, SSIS ETL flows, an SSAS cube, DAX measures, and Power BI dashboards.",
   },
   {
-    date: "2022 — 2023",
-    title: "Full-Stack Developer",
+    date: "May 2025 — Jul 2025",
+    title: "Full-Stack Java/Angular Developer — Intern",
     company: "Yuccainfo",
     description:
-      "Designed and developed full-stack web applications using Java, Spring Boot, and MySQL. Built RESTful APIs and responsive user interfaces, managing the full development lifecycle from requirements to deployment.",
+      "Contributed to a supermarket ERP by developing Spring Boot REST APIs, Angular interfaces, product, inventory, and sales modules, with MySQL persistence and Postman validation.",
   },
   {
-    date: "2021 — 2022",
-    title: "Junior Developer",
-    company: "3alink",
-    description:
-      "Developed and maintained web applications with a focus on backend services. Worked with Java and relational databases, gaining hands-on experience with agile methodologies and collaborative development practices.",
-  },
-  {
-    date: "2020 — 2021",
-    title: "Web Developer Intern",
+    date: "Jul 2024 — Sep 2024",
+    title: "Web Developer & Automation Intern",
     company: "2Peerfect",
     description:
-      "Assisted in building and maintaining client websites and internal tools. Gained foundational experience in web development, database management, and software testing.",
+      "Analyzed an existing website, built responsive interactive interfaces, and introduced web-scraping automation to extract and structure data.",
+  },
+  {
+    date: "Jun 2024 — Jul 2024",
+    title: "Web Developer Intern",
+    company: "3alink",
+    description:
+      "Analyzed Odoo performance constraints and built a responsive prototype focused on the identified improvement areas.",
   },
 ]
 

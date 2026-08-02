@@ -59,6 +59,12 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-[#009688] text-white",
     category: "Backend",
   },
+  SQLALCHEMY: {
+    key: "SQLALCHEMY",
+    name: "SQLAlchemy",
+    class: "bg-[#D71F00] text-white",
+    category: "Backend",
+  },
   NET: {
     key: "NET",
     name: ".NET Web API",
@@ -107,6 +113,12 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "TYPESCRIPT",
     name: "TypeScript",
     class: "bg-[#3178C6] text-white",
+    category: "Frontend",
+  },
+  NEXT_JS: {
+    key: "NEXT_JS",
+    name: "Next.js",
+    class: "bg-black text-white",
     category: "Frontend",
   },
 
@@ -237,6 +249,12 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "CODE_ANALYSIS",
     name: "Code Analysis",
     class: "bg-[#059669] text-white",
+    category: "AI & Modernization",
+  },
+  LANGGRAPH: {
+    key: "LANGGRAPH",
+    name: "LangGraph",
+    class: "bg-[#111827] text-white",
     category: "AI & Modernization",
   },
 }

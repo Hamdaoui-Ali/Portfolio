@@ -4,7 +4,7 @@ summary: "Comprehensive IT solutions platform offering integrated services for b
 status: completed
 role: "Backend Developer"
 category: "Full-Stack"
-github: "https://github.com/Hamdaoui-Ali/smart-solutions"
+visibility: private
 featured: false
 sortOrder: 10
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]

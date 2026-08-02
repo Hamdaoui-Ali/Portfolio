@@ -5,6 +5,12 @@ status: completed
 role: "BI Developer"
 category: "BI & Data"
 featured: true
+evidence:
+  [
+    "Star-schema warehouse",
+    "SSIS → SSAS → Power BI pipeline",
+    "DAX measures and KPI dashboards",
+  ]
 sortOrder: 4
 stack: ["SQL_SERVER", "SSIS", "SSAS", "POWER_BI"]
 ---

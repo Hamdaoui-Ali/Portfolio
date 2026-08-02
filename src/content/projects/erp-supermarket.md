@@ -5,6 +5,12 @@ status: completed
 role: "Full-Stack Developer"
 category: "ERP"
 featured: true
+evidence:
+  [
+    "Spring Boot REST APIs",
+    "Angular inventory and sales modules",
+    "Postman-validated workflows",
+  ]
 sortOrder: 3
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---

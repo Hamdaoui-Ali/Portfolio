@@ -4,8 +4,8 @@ summary: "Desktop application for secure music file management and digital right
 status: completed
 role: "Full-Stack Developer"
 category: "Desktop"
-github: "https://github.com/Hamdaoui-Ali/rifflock-desktop"
-featured: true
+visibility: private
+featured: false
 sortOrder: 2
 stack: ["JAVA", "SPRING_BOOT", "MYSQL", "JUNIT"]
 ---

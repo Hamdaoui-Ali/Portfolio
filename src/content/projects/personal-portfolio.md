@@ -6,7 +6,7 @@ role: "Full-Stack Developer"
 category: "Full-Stack"
 github: "https://github.com/Hamdaoui-Ali/Portfolio"
 demo: "https://ali-hamdaoui.vercel.app"
-featured: true
+featured: false
 sortOrder: 9
 stack: ["ASTRO", "TAILWIND", "TYPESCRIPT", "GITHUB_ACTIONS", "VERCEL"]
 ---
