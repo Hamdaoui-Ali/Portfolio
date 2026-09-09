@@ -4,14 +4,15 @@ summary: "Doctor-patient appointment management platform with a modular Spring B
 status: in-progress
 role: "Java Full-Stack Developer"
 category: "Java Full-Stack · Healthcare"
+disciplines: ["full-stack", "backend-apis"]
 github: "https://github.com/Hamdaoui-Ali/MediLink"
 visibility: public
 evidence:
   - "Workspace split between a Spring Boot API and Angular 21 application"
   - "Modular-monolith boundaries for patient, doctor, and admin workflows"
   - "MySQL target with migration and database-dependent integration testing"
-featured: false
-sortOrder: 6
+featured: true
+sortOrder: 5
 stack:
   [
     "JAVA",

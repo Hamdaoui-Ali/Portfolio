@@ -4,14 +4,15 @@ summary: "Local-first Windows security application that protects files and folde
 status: completed
 role: "Python Desktop Security Engineer"
 category: "Cybersecurity · Desktop · Python"
+disciplines: ["security-desktop"]
 github: "https://github.com/Hamdaoui-Ali/RiffLock"
 visibility: public
 evidence:
   - "Wrapped data-encryption key with password-based authentication"
   - "Single-file and recursive folder protection using .rifflock containers"
   - "Optional guitar-riff 2FA kept separate from encryption material"
-featured: false
-sortOrder: 7
+featured: true
+sortOrder: 6
 stack:
   [
     "PYTHON",

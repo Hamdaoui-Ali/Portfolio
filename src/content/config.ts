@@ -7,6 +7,17 @@ const projects = defineCollection({
     status: z.enum(["completed", "in-progress", "planned"]),
     role: z.string(),
     category: z.string().min(1),
+    disciplines: z
+      .array(
+        z.enum([
+          "full-stack",
+          "backend-apis",
+          "data-analytics",
+          "automation-ai",
+          "security-desktop",
+        ]),
+      )
+      .min(1),
     image: z.string().optional(),
     github: z.string().url().optional(),
     demo: z.string().url().optional(),

@@ -4,10 +4,11 @@ summary: "Full-Stack Software Engineer portfolio built with Astro, Tailwind CSS,
 status: in-progress
 role: "Full-Stack Developer"
 category: "Full-Stack"
+disciplines: ["full-stack"]
 github: "https://github.com/Hamdaoui-Ali/Portfolio"
 demo: "https://ali-hamdaoui.vercel.app"
 featured: false
-sortOrder: 12
+sortOrder: 14
 stack: ["ASTRO", "TAILWIND", "TYPESCRIPT", "GITHUB_ACTIONS", "VERCEL"]
 ---
 

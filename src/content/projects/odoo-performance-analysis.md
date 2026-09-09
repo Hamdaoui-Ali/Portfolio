@@ -4,8 +4,9 @@ summary: "Performance analysis and benchmarking tool for Odoo ERP deployments, i
 status: completed
 role: "Backend Developer"
 category: "ERP"
+disciplines: ["backend-apis", "data-analytics", "automation-ai"]
 featured: false
-sortOrder: 14
+sortOrder: 16
 stack: ["PYTHON", "FLASK", "POSTMAN", "PYTEST"]
 ---
 

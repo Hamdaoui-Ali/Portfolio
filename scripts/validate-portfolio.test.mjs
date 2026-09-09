@@ -18,7 +18,7 @@ const frontmatter = (filePath) => {
   return match[1]
 }
 
-test("homepage features exactly three evidence-led projects", () => {
+test("homepage features the six diverse verified flagship projects", () => {
   const featured = projectFiles.filter((filePath) =>
     /^featured:\s*true\s*$/m.test(frontmatter(filePath)),
   )
@@ -26,11 +26,59 @@ test("homepage features exactly three evidence-led projects", () => {
   assert.deepEqual(
     featured.map((filePath) => filePath.split(/[\\/]/).at(-1)).sort(),
     [
-      "ai-migration-factory.md",
-      "bi-adventureworks2022.md",
-      "erp-supermarket.md",
+      "jobfinder.md",
+      "medilink.md",
+      "planops.md",
+      "portflow.md",
+      "remindly.md",
+      "rifflock-desktop.md",
     ],
   )
+})
+
+test("every project declares at least one supported engineering discipline", () => {
+  const supportedDisciplines = new Set([
+    "full-stack",
+    "backend-apis",
+    "data-analytics",
+    "automation-ai",
+    "security-desktop",
+  ])
+
+  for (const filePath of projectFiles) {
+    const source = frontmatter(filePath)
+    const match = source.match(/^disciplines:\s*\[([^\]]+)]\s*$/m)
+    assert.ok(match, `${filePath} must declare inline disciplines`)
+
+    const disciplines = match[1]
+      .split(",")
+      .map((value) => value.trim().replaceAll('"', ""))
+
+    assert.ok(disciplines.length > 0, `${filePath} needs a discipline`)
+    disciplines.forEach((discipline) =>
+      assert.ok(
+        supportedDisciplines.has(discipline),
+        `${filePath} uses unsupported discipline ${discipline}`,
+      ),
+    )
+  }
+})
+
+test("representative recruiter filters have the expected project evidence", () => {
+  const projectHasDiscipline = (slug, discipline) => {
+    const source = frontmatter(join(projectDirectory, `${slug}.md`))
+    assert.match(source, new RegExp(`^disciplines:.*"${discipline}".*$`, "m"))
+  }
+
+  for (const slug of ["medilink", "erp-supermarket", "parclick-parking"]) {
+    projectHasDiscipline(slug, "full-stack")
+  }
+
+  for (const slug of ["portflow", "bi-adventureworks2022"]) {
+    projectHasDiscipline(slug, "data-analytics")
+  }
+
+  projectHasDiscipline("rifflock-desktop", "security-desktop")
 })
 
 test("Migration Factory reflects its current agentic MVP", () => {
@@ -95,21 +143,24 @@ test("RiffLock describes the current Python security product", () => {
   assert.doesNotMatch(source, /JAVA/)
 })
 
-test("new projects stay grouped before legacy portfolio entries", () => {
+test("projects use the approved recruiter-first portfolio order", () => {
   const expectedSortOrders = {
-    jobfinder: 2,
-    planops: 3,
-    remindly: 4,
-    portflow: 5,
-    medilink: 6,
-    "rifflock-desktop": 7,
-    "web-scraping-automation": 8,
-    "parclick-parking": 9,
-    "7anoutna-ecommerce": 10,
-    "it-equipment-repair": 11,
-    "personal-portfolio": 12,
-    "smart-solutions": 13,
-    "odoo-performance-analysis": 14,
+    jobfinder: 1,
+    planops: 2,
+    remindly: 3,
+    portflow: 4,
+    medilink: 5,
+    "rifflock-desktop": 6,
+    "ai-migration-factory": 7,
+    "erp-supermarket": 8,
+    "bi-adventureworks2022": 9,
+    "web-scraping-automation": 10,
+    "parclick-parking": 11,
+    "7anoutna-ecommerce": 12,
+    "it-equipment-repair": 13,
+    "personal-portfolio": 14,
+    "smart-solutions": 15,
+    "odoo-performance-analysis": 16,
   }
 
   for (const [slug, sortOrder] of Object.entries(expectedSortOrders)) {

@@ -4,9 +4,10 @@ summary: "Comprehensive IT solutions platform offering integrated services for b
 status: completed
 role: "Backend Developer"
 category: "Full-Stack"
+disciplines: ["full-stack", "backend-apis"]
 visibility: private
 featured: false
-sortOrder: 13
+sortOrder: 15
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 

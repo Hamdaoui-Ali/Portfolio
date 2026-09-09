@@ -4,14 +4,15 @@ summary: "End-to-end business intelligence solution using SQL Server, SSIS, SSAS
 status: completed
 role: "BI Developer"
 category: "BI & Data"
-featured: true
+disciplines: ["data-analytics"]
+featured: false
 evidence:
   [
     "Star-schema warehouse",
     "SSIS → SSAS → Power BI pipeline",
     "DAX measures and KPI dashboards",
   ]
-sortOrder: 4
+sortOrder: 9
 stack: ["SQL_SERVER", "SSIS", "SSAS", "POWER_BI"]
 ---
 

@@ -4,14 +4,15 @@ summary: "Enterprise resource planning system designed for supermarket operation
 status: completed
 role: "Full-Stack Developer"
 category: "ERP"
-featured: true
+disciplines: ["full-stack", "backend-apis"]
+featured: false
 evidence:
   [
     "Spring Boot REST APIs",
     "Angular inventory and sales modules",
     "Postman-validated workflows",
   ]
-sortOrder: 3
+sortOrder: 8
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 

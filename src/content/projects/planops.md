@@ -4,14 +4,15 @@ summary: "Collaborative project and task management platform with workspaces, bo
 status: in-progress
 role: "Full-Stack Laravel Developer"
 category: "SaaS · Project Management · Laravel"
+disciplines: ["full-stack", "backend-apis"]
 github: "https://github.com/Hamdaoui-Ali/PlanOps"
 visibility: public
 evidence:
   - "Laravel domain-oriented application structure with authenticated resource bindings"
   - "Project collaboration flows covering membership and invitation lifecycle"
   - "Dedicated tests, analytics, activity history, search, and export workflows"
-featured: false
-sortOrder: 3
+featured: true
+sortOrder: 2
 stack: ["PHP", "LARAVEL", "LIVEWIRE", "TAILWIND", "VITE", "PEST"]
 ---
 

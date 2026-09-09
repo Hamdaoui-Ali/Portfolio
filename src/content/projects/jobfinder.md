@@ -4,14 +4,15 @@ summary: "Morocco-first federated job-discovery engine that normalizes, deduplic
 status: in-progress
 role: "Full-Stack Product Engineer"
 category: "Full-Stack · Search · Automation"
+disciplines: ["full-stack", "backend-apis", "automation-ai"]
 github: "https://github.com/Hamdaoui-Ali/JobFinder"
 visibility: public
 evidence:
   - "Greenhouse and Lever connectors with source failure isolation"
   - "Deterministic filtering, relevance scoring, and deduplication"
   - "Local-first SQLite metadata with original-source redirection"
-featured: false
-sortOrder: 2
+featured: true
+sortOrder: 1
 stack:
   [
     "PYTHON",

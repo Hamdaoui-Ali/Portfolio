@@ -4,14 +4,15 @@ summary: "Reproducible container-terminal data platform with Bronze/Silver/Gold 
 status: in-progress
 role: "Data Engineer"
 category: "Data Engineering · Analytics · Logistics"
+disciplines: ["data-analytics", "automation-ai"]
 github: "https://github.com/Hamdaoui-Ali/PortFlow"
 visibility: public
 evidence:
   - "Deterministic simulated operations data with a local PostgreSQL pipeline"
   - "Bronze-to-Silver validation, quarantine handling, and row reconciliation"
   - "Gold analytical snapshots published to a static web application"
-featured: false
-sortOrder: 5
+featured: true
+sortOrder: 4
 stack:
   [
     "PYTHON",

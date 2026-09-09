@@ -4,6 +4,7 @@ summary: "Agentic migration platform for staged Angular and Java/Spring Boot mod
 status: in-progress
 role: "Lead Developer — CGI PFE MVP"
 category: "AI"
+disciplines: ["full-stack", "backend-apis", "automation-ai"]
 visibility: private
 evidence:
   [
@@ -11,8 +12,8 @@ evidence:
     "Agent workflow with approval gates",
     "ROI study with estimated 80% time saving",
   ]
-featured: true
-sortOrder: 1
+featured: false
+sortOrder: 7
 stack:
   [
     "JAVA",

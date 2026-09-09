@@ -4,14 +4,15 @@ summary: "Production-oriented reminder platform with Supabase authentication, du
 status: in-progress
 role: "Full-Stack Reliability Engineer"
 category: "SaaS · Reliability Engineering · Full-Stack"
+disciplines: ["full-stack", "backend-apis"]
 github: "https://github.com/Hamdaoui-Ali/Remindly"
 visibility: public
 evidence:
   - "Durable notification ledger with atomic claims, leases, retries, and idempotency"
   - "Protected processor API with Supabase Cron and GitHub Actions fallback"
   - "Dry-run backfills, reconciliation checks, health endpoints, and end-to-end tests"
-featured: false
-sortOrder: 4
+featured: true
+sortOrder: 3
 stack:
   [
     "NEXT_JS",
