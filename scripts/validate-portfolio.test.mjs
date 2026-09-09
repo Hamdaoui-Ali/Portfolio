@@ -122,8 +122,20 @@ test("homepage exposes a flagship case study and CV action", () => {
   const source = read("src/components/Hero.astro")
 
   assert.match(source, /\/projects\/ai-migration-factory/)
-  assert.match(source, /cv-ali-hamdaoui/)
+  assert.match(source, /Hamdaoui_Ali_CV_FR\.pdf/)
+  assert.match(source, /download="Hamdaoui_Ali_CV_FR\.pdf"/)
   assert.match(source, /View Migration Factory case study/)
+})
+
+test("homepage CV action points to a real PDF asset", () => {
+  const source = read("src/components/Hero.astro")
+  const pdfPath = join(root, "public", "Hamdaoui_Ali_CV_FR.pdf")
+
+  assert.match(source, /href="\/Hamdaoui_Ali_CV_FR\.pdf"/)
+  assert.ok(existsSync(pdfPath), "the supplied CV PDF must exist in public")
+
+  const signature = readFileSync(pdfPath).subarray(0, 5)
+  assert.deepEqual([...signature], [0x25, 0x50, 0x44, 0x46, 0x2d])
 })
 
 test("homepage badge communicates Ali's professional identity", () => {
