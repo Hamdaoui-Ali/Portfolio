@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from "node:fs"
+import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
 import test from "node:test"
 import assert from "node:assert/strict"
@@ -74,6 +74,31 @@ test("homepage exposes a flagship case study and CV action", () => {
   assert.match(source, /\/projects\/ai-migration-factory/)
   assert.match(source, /cv-ali-hamdaoui/)
   assert.match(source, /View Migration Factory case study/)
+})
+
+test("homepage badge communicates Ali's professional identity", () => {
+  const source = read("src/components/Hero.astro")
+
+  assert.match(source, /Engineer · Builder · Innovator/)
+  assert.doesNotMatch(source, /CGI PFE · Mar–Aug 2026/)
+})
+
+test("homepage profile images resolve to valid JPEG assets", () => {
+  const site = read("src/data/site.ts")
+  const imagePaths = [
+    "/images/ali-hamdaoui-formal.jpeg",
+    "/images/ali-hamdaoui-conference.jpeg",
+  ]
+
+  for (const imagePath of imagePaths) {
+    assert.match(site, new RegExp(`"${imagePath}"`))
+
+    const publicPath = join(root, "public", imagePath.slice(1))
+    assert.ok(existsSync(publicPath), `${imagePath} must exist in public`)
+
+    const signature = readFileSync(publicPath).subarray(0, 3)
+    assert.deepEqual([...signature], [0xff, 0xd8, 0xff])
+  }
 })
 
 test("interactive controls expose responsive and radio-menu semantics", () => {
