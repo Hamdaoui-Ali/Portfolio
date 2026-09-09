@@ -5,7 +5,7 @@ status: completed
 role: "Backend Developer"
 category: "Web Scraping"
 featured: false
-sortOrder: 5
+sortOrder: 8
 stack: ["PYTHON", "FASTAPI", "SELENIUM", "PYTEST"]
 ---
 

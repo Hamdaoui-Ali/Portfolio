@@ -6,7 +6,7 @@ role: "Backend Developer"
 category: "Full-Stack"
 visibility: private
 featured: false
-sortOrder: 10
+sortOrder: 13
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 

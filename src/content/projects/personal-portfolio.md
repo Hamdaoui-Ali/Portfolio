@@ -7,7 +7,7 @@ category: "Full-Stack"
 github: "https://github.com/Hamdaoui-Ali/Portfolio"
 demo: "https://ali-hamdaoui.vercel.app"
 featured: false
-sortOrder: 9
+sortOrder: 12
 stack: ["ASTRO", "TAILWIND", "TYPESCRIPT", "GITHUB_ACTIONS", "VERCEL"]
 ---
 

@@ -5,7 +5,7 @@ status: completed
 role: "Full-Stack Developer"
 category: "Full-Stack"
 featured: false
-sortOrder: 8
+sortOrder: 11
 stack: ["JAVA", "SPRING_BOOT", "ANGULAR", "MYSQL", "DOCKER"]
 ---
 
