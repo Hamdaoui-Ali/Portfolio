@@ -238,8 +238,20 @@ test("project explorer wires accessible filters to shareable URL state", () => {
   assert.match(projects, /aria-pressed=/)
   assert.match(projects, /aria-live="polite"/)
   assert.match(projects, /history\.replaceState/)
+  assert.match(
+    projects,
+    /matchMedia\([\s\S]*?"\(prefers-reduced-motion: reduce\)"/,
+  )
   assert.match(projects, /Show all projects/)
   assert.match(projects, /View case study/)
+})
+
+test("project explorer hidden state overrides card and button display utilities", () => {
+  const projects = read("src/components/Projects.astro")
+
+  assert.match(projects, /\[data-project-card\]\[hidden\]/)
+  assert.match(projects, /\[data-show-all-projects\]\[hidden\]/)
+  assert.match(projects, /display:\s*none\s*!important/)
 })
 
 test("homepage puts project and capability proof before experience", () => {

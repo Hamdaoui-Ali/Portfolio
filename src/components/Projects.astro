@@ -321,6 +321,9 @@ const flagshipCount = projects.filter((project) => project.featured).length
       disciplines: card.dataset.disciplines?.split(" ").filter(Boolean) ?? [],
       stack: card.dataset.stack?.split(" ").filter(Boolean) ?? [],
     }))
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches
 
     let state = parseFilterSearch(window.location.search)
     let showAll = false
@@ -386,7 +389,10 @@ const flagshipCount = projects.filter((project) => project.featured).length
           }
           showAll = false
           render()
-          root.scrollIntoView({ behavior: "smooth", block: "start" })
+          root.scrollIntoView({
+            behavior: reduceMotion ? "auto" : "smooth",
+            block: "start",
+          })
         },
         { signal },
       )
@@ -418,6 +424,11 @@ const flagshipCount = projects.filter((project) => project.featured).length
 </script>
 
 <style>
+  [data-project-card][hidden],
+  [data-show-all-projects][hidden] {
+    display: none !important;
+  }
+
   .project-filter[aria-pressed="true"] {
     @apply border-yellow-400 bg-yellow-400 text-gray-950 shadow-sm;
   }
