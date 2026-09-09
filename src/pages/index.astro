@@ -5,13 +5,12 @@ import { SITE_CONFIG } from "@/data/site"
 import AboutMe from "@/components/AboutMe.astro"
 import Briefcase from "@/components/icons/Briefcase.astro"
 import CodeDots from "@/components/icons/CodeDots.astro"
+import EngineeringCapabilities from "@/components/EngineeringCapabilities.astro"
 import Experience from "@/components/Experience.astro"
 import UserHeart from "@/components/icons/UserHeart.astro"
 import Projects from "@/components/Projects.astro"
 import SectionContainer from "@/components/SectionContainer.astro"
 import Hero from "@/components/Hero.astro"
-import TechStack from "@/components/TechStack.astro"
-import MigrationPipeline from "@/components/MigrationPipeline.astro"
 import Achievements from "@/components/Achievements.astro"
 import Contact from "@/components/Contact.astro"
 import TitleSection from "@/components/TitleSection.astro"
@@ -19,40 +18,40 @@ import TitleSection from "@/components/TitleSection.astro"
 
 <Layout title={SITE_CONFIG.title} description={SITE_CONFIG.description}>
   <main id="main-content" class="px-4">
-    <SectionContainer class="py-16 md:py-36">
+    <SectionContainer class="py-20 md:py-32">
       <Hero />
     </SectionContainer>
     <div class="space-y-24">
-      <SectionContainer id="experience">
-        <TitleSection>
-          <Briefcase class="size-8" />
-          Work Experience
-        </TitleSection>
-        <Experience />
-      </SectionContainer>
-
       <SectionContainer id="projects">
         <TitleSection>
           <CodeDots class="size-7" />
-          Projects
+          Selected Work
         </TitleSection>
+        <p class="-mt-4 mb-8 max-w-2xl text-gray-600 dark:text-gray-400">
+          Filter by discipline and technology to see the projects most relevant
+          to your role, team, or product challenge.
+        </p>
         <Projects />
       </SectionContainer>
 
-      <SectionContainer id="stack">
+      <SectionContainer id="capabilities">
         <TitleSection>
           <CodeDots class="size-7" />
-          Stack
+          Engineering Capabilities
         </TitleSection>
-        <TechStack />
+        <p class="-mt-4 mb-8 max-w-2xl text-gray-600 dark:text-gray-400">
+          Technologies matter, but the stronger signal is what I can design,
+          connect, validate, and operate with them.
+        </p>
+        <EngineeringCapabilities />
       </SectionContainer>
 
-      <SectionContainer id="modernization">
+      <SectionContainer id="experience">
         <TitleSection>
-          <CodeDots class="size-7" />
-          Modernization Pipeline
+          <Briefcase class="size-8" />
+          Engineering Experience
         </TitleSection>
-        <MigrationPipeline />
+        <Experience />
       </SectionContainer>
 
       <SectionContainer id="achievements">
@@ -74,8 +73,12 @@ import TitleSection from "@/components/TitleSection.astro"
       <SectionContainer id="contact">
         <TitleSection>
           <UserHeart class="size-8" />
-          Contact
+          Let's Build Something Useful
         </TitleSection>
+        <p class="-mt-4 mb-8 max-w-2xl text-gray-600 dark:text-gray-400">
+          Hiring for a software-engineering role or planning a product? Share
+          the problem, constraints, and outcome you need.
+        </p>
         <Contact />
       </SectionContainer>
     </div>

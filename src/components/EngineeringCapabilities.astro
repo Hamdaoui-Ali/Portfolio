@@ -1,0 +1,129 @@
+---
+const CAPABILITIES = [
+  {
+    number: "01",
+    title: "Product Engineering",
+    description:
+      "I shape complete products around real workflows: authentication, permissions, collaboration, background jobs, usable interfaces, and operational visibility.",
+    practices: ["Domain workflows", "Auth & permissions", "End-to-end testing"],
+    projects: [
+      { title: "JobFinder", slug: "jobfinder" },
+      { title: "PlanOps", slug: "planops" },
+      { title: "Remindly", slug: "remindly" },
+    ],
+  },
+  {
+    number: "02",
+    title: "Backend & APIs",
+    description:
+      "I design modular services with explicit boundaries, validated contracts, secure resource access, controlled migrations, and failure-aware processing.",
+    practices: ["REST APIs", "Modular architecture", "Reliable persistence"],
+    projects: [
+      { title: "MediLink", slug: "medilink" },
+      { title: "JobFinder", slug: "jobfinder" },
+      { title: "Remindly", slug: "remindly" },
+    ],
+  },
+  {
+    number: "03",
+    title: "Data Platforms & Analytics",
+    description:
+      "I build reproducible pipelines that make quality visible—from ingestion and quarantine to analytical models, reconciled outputs, and decision-ready dashboards.",
+    practices: [
+      "Data quality",
+      "dbt & dimensional models",
+      "Reproducible pipelines",
+    ],
+    projects: [
+      { title: "PortFlow", slug: "portflow" },
+      {
+        title: "AdventureWorks BI",
+        slug: "bi-adventureworks2022",
+      },
+    ],
+  },
+  {
+    number: "04",
+    title: "Automation & AI",
+    description:
+      "I automate repetitive technical work with deterministic rules, controlled source policies, validation gates, and human-reviewable evidence.",
+    practices: [
+      "Workflow automation",
+      "Deterministic scoring",
+      "AI guardrails",
+    ],
+    projects: [
+      { title: "JobFinder", slug: "jobfinder" },
+      {
+        title: "AI Migration Factory",
+        slug: "ai-migration-factory",
+      },
+    ],
+  },
+  {
+    number: "05",
+    title: "Security & Desktop",
+    description:
+      "I can work beyond the browser, including local-first Windows software, encrypted containers, wrapped keys, careful recovery boundaries, and audio processing.",
+    practices: ["Local-first security", "Key management", "Desktop packaging"],
+    projects: [{ title: "RiffLock", slug: "rifflock-desktop" }],
+  },
+]
+---
+
+<div
+  class="overflow-hidden rounded-2xl border border-gray-200 bg-white/65 dark:border-gray-800 dark:bg-gray-900/60"
+>
+  <div class="grid md:grid-cols-2">
+    {
+      CAPABILITIES.map((capability, index) => (
+        <article
+          class={`relative p-6 sm:p-7 ${
+            index % 2 === 0
+              ? "md:border-r md:border-gray-200 md:dark:border-gray-800"
+              : ""
+          } ${
+            index < CAPABILITIES.length - 1
+              ? "border-b border-gray-200 dark:border-gray-800"
+              : ""
+          } ${index === CAPABILITIES.length - 1 ? "md:col-span-2" : ""}`}
+        >
+          <span class="text-xs font-semibold tracking-[0.18em] text-yellow-600 dark:text-yellow-400">
+            {capability.number}
+          </span>
+          <h3 class="mt-2 text-xl font-bold text-gray-900 dark:text-white">
+            {capability.title}
+          </h3>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+            {capability.description}
+          </p>
+
+          <ul
+            class="mt-4 flex flex-wrap gap-2"
+            aria-label="Engineering practices"
+          >
+            {capability.practices.map((practice) => (
+              <li class="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                {practice}
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <span class="font-medium text-gray-500 dark:text-gray-500">
+              Proof:
+            </span>
+            {capability.projects.map((project) => (
+              <a
+                href={`/projects/${project.slug}`}
+                class="rounded-sm font-semibold text-gray-800 underline decoration-yellow-400/60 underline-offset-4 transition hover:text-yellow-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:text-gray-100 dark:hover:text-yellow-300"
+              >
+                {project.title}
+              </a>
+            ))}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</div>

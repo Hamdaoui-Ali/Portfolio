@@ -15,7 +15,7 @@ const experience: ExperienceEntry[] = [
     description:
       "Lead developer for two internally validated AI Migration Factory MVPs. Built agent-orchestrated workflows, backend services, tracking UI, validation gates, reporting, and DevOps integration for incremental Java/Spring Boot and Angular modernization.",
     link: "https://www.cgi.com",
-    current: true,
+    current: false,
   },
   {
     date: "Jul 2025 — Sep 2025",

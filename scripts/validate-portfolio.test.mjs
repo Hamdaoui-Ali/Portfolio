@@ -92,14 +92,16 @@ test("Migration Factory reflects its current agentic MVP", () => {
   assert.match(source, /estimated/i)
 })
 
-test("public metadata matches the current CGI engagement", () => {
+test("public metadata leads with Software Engineer while preserving CGI history", () => {
   const site = read("src/data/site.ts")
   const experience = read("src/data/experience.ts")
 
-  assert.match(site, /worksFor:\s*"CGI"/)
+  assert.match(site, /jobTitle:\s*"Software Engineer"/)
+  assert.doesNotMatch(site, /worksFor:\s*"CGI"/)
   assert.match(site, /alihamdaoui000@gmail\.com/)
   assert.match(experience, /Software Engineer — PFE Intern/)
   assert.match(experience, /Mar 2026 — Aug 2026/)
+  assert.match(experience, /current:\s*false/)
 })
 
 test("dead repositories are represented as private, not public code links", () => {
@@ -169,13 +171,15 @@ test("projects use the approved recruiter-first portfolio order", () => {
   }
 })
 
-test("homepage exposes a flagship case study and CV action", () => {
+test("homepage hero leads with broad Software Engineer positioning", () => {
   const source = read("src/components/Hero.astro")
 
-  assert.match(source, /\/projects\/ai-migration-factory/)
+  assert.match(source, /Software Engineer/)
+  assert.match(source, /Explore selected work/)
   assert.match(source, /Hamdaoui_Ali_CV_FR\.pdf/)
   assert.match(source, /download="Hamdaoui_Ali_CV_FR\.pdf"/)
-  assert.match(source, /View Migration Factory case study/)
+  assert.doesNotMatch(source, /Migration Factory case study/)
+  assert.doesNotMatch(source, /Current focus/)
 })
 
 test("homepage CV action points to a real PDF asset", () => {
@@ -236,4 +240,42 @@ test("project explorer wires accessible filters to shareable URL state", () => {
   assert.match(projects, /history\.replaceState/)
   assert.match(projects, /Show all projects/)
   assert.match(projects, /View case study/)
+})
+
+test("homepage puts project and capability proof before experience", () => {
+  const homepage = read("src/pages/index.astro")
+  const projectsIndex = homepage.indexOf('id="projects"')
+  const capabilitiesIndex = homepage.indexOf('id="capabilities"')
+  const experienceIndex = homepage.indexOf('id="experience"')
+
+  assert.ok(projectsIndex > -1, "projects section must exist")
+  assert.ok(capabilitiesIndex > projectsIndex, "capabilities follow projects")
+  assert.ok(experienceIndex > capabilitiesIndex, "experience follows proof")
+  assert.doesNotMatch(homepage, /MigrationPipeline/)
+  assert.doesNotMatch(homepage, /id="modernization"/)
+})
+
+test("capability stories connect engineering strengths to project evidence", () => {
+  const capabilities = read("src/components/EngineeringCapabilities.astro")
+
+  for (const heading of [
+    "Product Engineering",
+    "Backend & APIs",
+    "Data Platforms & Analytics",
+    "Automation & AI",
+    "Security & Desktop",
+  ]) {
+    assert.match(capabilities, new RegExp(heading))
+  }
+
+  for (const slug of [
+    "jobfinder",
+    "planops",
+    "remindly",
+    "portflow",
+    "medilink",
+    "rifflock-desktop",
+  ]) {
+    assert.match(capabilities, new RegExp(`slug:\\s*"${slug}"`))
+  }
 })

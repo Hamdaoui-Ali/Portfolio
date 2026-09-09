@@ -6,19 +6,19 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    title: "Experience",
-    label: "experience",
-    url: "/#experience",
-  },
-  {
-    title: "Projects",
+    title: "Work",
     label: "projects",
     url: "/#projects",
   },
   {
-    title: "Stack",
-    label: "stack",
-    url: "/#stack",
+    title: "Capabilities",
+    label: "capabilities",
+    url: "/#capabilities",
+  },
+  {
+    title: "Experience",
+    label: "experience",
+    url: "/#experience",
   },
   {
     title: "Achievements",

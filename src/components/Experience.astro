@@ -3,7 +3,42 @@ import ExperienceItem from "./ExperienceItem.astro"
 import experience from "@/data/experience"
 ---
 
-<ol class="relative mt-16" aria-label="Work Experience">
+<div
+  class="mb-12 grid gap-4 rounded-2xl border border-gray-200 bg-white/60 p-5 dark:border-gray-800 dark:bg-gray-900/60 sm:grid-cols-3 sm:p-6"
+>
+  <div>
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.16em] text-yellow-600 dark:text-yellow-400"
+    >
+      Enterprise delivery
+    </p>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      Modernization workflows, validation gates, and engineering automation.
+    </p>
+  </div>
+  <div>
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.16em] text-yellow-600 dark:text-yellow-400"
+    >
+      Product systems
+    </p>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      REST APIs, Angular interfaces, ERP workflows, and operational data.
+    </p>
+  </div>
+  <div>
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.16em] text-yellow-600 dark:text-yellow-400"
+    >
+      Data & automation
+    </p>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      BI pipelines, analytical models, web extraction, and repeatable tooling.
+    </p>
+  </div>
+</div>
+
+<ol class="relative" aria-label="Engineering Experience">
   {
     experience.map((exp, i) => (
       <li class="anim-fade-in" style={`animation-delay: ${i * 150}ms`}>

@@ -9,104 +9,145 @@ import SocialPill from "@/components/SocialPill.astro"
 import { SITE_CONFIG } from "@/data/site"
 ---
 
-<div class="max-w-3xl">
-  <div class="anim-fade-in flex gap-4 mb-6 items-center">
-    <!-- Avatar with ambient glow -->
-    <div class="relative flex-shrink-0">
-      <div
-        class="absolute inset-0 rounded-full bg-yellow-400/30 dark:bg-yellow-400/20 blur-xl scale-125"
-        aria-hidden="true"
-      >
+<div class="grid items-center gap-10 lg:grid-cols-[1fr_17rem] lg:gap-14">
+  <div class="max-w-3xl">
+    <div class="anim-fade-in mb-6 flex items-center gap-4">
+      <div class="relative flex-shrink-0 lg:hidden">
+        <div
+          class="absolute inset-0 scale-125 rounded-full bg-yellow-400/25 blur-xl dark:bg-yellow-400/15"
+          aria-hidden="true"
+        >
+        </div>
+        <img
+          class="relative size-20 rounded-full object-cover object-top shadow-2xl ring-2 ring-yellow-400/60 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-950"
+          src={SITE_CONFIG.avatarImage}
+          alt={`Portrait of ${SITE_CONFIG.author}`}
+        />
       </div>
+      <a
+        href={SITE_CONFIG.linkedInUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center rounded-full transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+      >
+        <Badge
+          ><SparklesIcon class="size-3" /> Engineer · Builder · Innovator</Badge
+        >
+      </a>
+    </div>
+
+    <p
+      class="anim-fade-in anim-delay-1 text-sm font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400"
+    >
+      Software Engineer
+    </p>
+    <h1
+      class="anim-fade-in anim-delay-1 mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-[3.55rem] lg:leading-[1.05] dark:text-white"
+    >
+      I build software that <span class="gradient-name"
+        >holds up in the real world.</span
+      >
+    </h1>
+
+    <p
+      class="anim-fade-in anim-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-gray-700 dark:text-gray-300 sm:text-xl"
+    >
+      From full-stack products and secure APIs to data pipelines, automation
+      engines, and desktop security tools, I turn complex workflows into
+      dependable software.
+    </p>
+
+    <p
+      class="anim-fade-in anim-delay-2 mt-4 text-sm font-medium text-gray-500 dark:text-gray-400"
+    >
+      Java / Spring Boot · Python · PHP / Laravel · TypeScript / React
+    </p>
+
+    <div class="anim-fade-in anim-delay-3 mt-8 flex flex-wrap gap-3">
+      <a
+        href="#projects"
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-yellow-400 px-4 py-2 font-semibold text-gray-950 transition hover:bg-yellow-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+      >
+        Explore selected work
+        <ArrowRightIcon class="size-4" />
+      </a>
+      <a
+        href="/Hamdaoui_Ali_CV_FR.pdf"
+        download="Hamdaoui_Ali_CV_FR.pdf"
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white/70 px-4 py-2 font-semibold text-gray-800 transition hover:border-yellow-400 hover:text-yellow-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:border-yellow-400 dark:hover:text-yellow-300 dark:focus-visible:ring-offset-gray-950"
+      >
+        Download CV
+      </a>
+    </div>
+
+    <dl
+      class="anim-fade-in anim-delay-4 mt-8 grid max-w-2xl grid-cols-3 gap-3 border-y border-gray-200/80 py-4 text-sm dark:border-gray-800/80"
+    >
+      <div>
+        <dt class="text-xl font-bold text-gray-900 dark:text-white">6</dt>
+        <dd class="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
+          Flagship builds
+        </dd>
+      </div>
+      <div>
+        <dt class="text-xl font-bold text-gray-900 dark:text-white">4</dt>
+        <dd class="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
+          Core languages
+        </dd>
+      </div>
+      <div>
+        <dt class="text-xl font-bold text-gray-900 dark:text-white">5</dt>
+        <dd class="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
+          Engineering contexts
+        </dd>
+      </div>
+    </dl>
+
+    <nav
+      class="anim-fade-in anim-delay-4 mt-6 flex flex-wrap gap-4"
+      aria-label="Social links and contact"
+    >
+      <SocialPill href={`mailto:${SITE_CONFIG.email}`}>
+        <MailIcon class="size-4" />
+        Let's talk
+      </SocialPill>
+      <SocialPill href={SITE_CONFIG.linkedInUrl}>
+        <LinkedInIcon class="size-4" />
+        LinkedIn
+      </SocialPill>
+      <SocialPill href={SITE_CONFIG.githubUrl}>
+        <GitHubIcon class="size-4" />
+        GitHub
+      </SocialPill>
+    </nav>
+  </div>
+
+  <div class="anim-fade-in anim-delay-2 relative hidden lg:block">
+    <div
+      class="absolute -inset-5 rounded-[2rem] bg-yellow-400/10 blur-2xl dark:bg-yellow-400/[0.06]"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="relative overflow-hidden rounded-[1.75rem] border border-gray-200 bg-white/70 p-2 shadow-2xl dark:border-gray-800 dark:bg-gray-900/70"
+    >
       <img
-        class="relative rounded-full object-cover object-top shadow-2xl size-20 ring-2 ring-yellow-400/60 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-950"
+        width="272"
+        height="330"
         src={SITE_CONFIG.avatarImage}
         alt={`Portrait of ${SITE_CONFIG.author}`}
+        class="h-[20.5rem] w-full rounded-[1.35rem] object-cover object-top"
       />
-    </div>
-    <a
-      href={SITE_CONFIG.linkedInUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center transition md:justify-center md:hover:scale-105"
-    >
-      <Badge
-        ><SparklesIcon class="size-3" /> Engineer · Builder · Innovator</Badge
+      <div
+        class="absolute inset-x-5 bottom-5 rounded-xl border border-white/15 bg-gray-950/85 px-4 py-3 text-white shadow-xl backdrop-blur"
       >
-    </a>
+        <p class="text-xs uppercase tracking-[0.16em] text-yellow-300">
+          Based in Morocco
+        </p>
+        <p class="mt-1 text-sm font-medium">
+          Open to engineering teams & clients
+        </p>
+      </div>
+    </div>
   </div>
-
-  <h1
-    class="anim-fade-in anim-delay-1 text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
-  >
-    Full-Stack Engineer for <span class="gradient-name"
-      >enterprise modernization.</span
-    >
-  </h1>
-
-  <p
-    class="anim-fade-in anim-delay-2 mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
-  >
-    I build <strong
-      >agentic migration workflows and dependable enterprise software</strong
-    > across Java/Spring Boot, Angular, Python, data platforms, and cloud automation.
-  </p>
-
-  <div class="anim-fade-in anim-delay-3 mt-8 flex flex-wrap gap-3">
-    <a
-      href="/projects/ai-migration-factory"
-      class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-yellow-400 px-4 py-2 font-semibold text-gray-950 transition hover:bg-yellow-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
-    >
-      View Migration Factory case study
-      <ArrowRightIcon class="size-4" />
-    </a>
-    <a
-      href="/Hamdaoui_Ali_CV_FR.pdf"
-      download="Hamdaoui_Ali_CV_FR.pdf"
-      class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white/70 px-4 py-2 font-semibold text-gray-800 transition hover:border-yellow-400 hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:border-yellow-400 dark:hover:text-yellow-300 dark:focus-visible:ring-offset-gray-950"
-    >
-      Download CV
-    </a>
-  </div>
-
-  <dl
-    class="anim-fade-in anim-delay-4 mt-8 grid max-w-2xl grid-cols-1 gap-3 border-y border-gray-200/80 py-4 text-sm dark:border-gray-800/80 sm:grid-cols-3"
-  >
-    <div>
-      <dt class="text-gray-500 dark:text-gray-500">Current focus</dt>
-      <dd class="mt-1 font-semibold text-gray-800 dark:text-gray-100">
-        AI migration systems
-      </dd>
-    </div>
-    <div>
-      <dt class="text-gray-500 dark:text-gray-500">Core delivery</dt>
-      <dd class="mt-1 font-semibold text-gray-800 dark:text-gray-100">
-        Java · Angular · Python
-      </dd>
-    </div>
-    <div>
-      <dt class="text-gray-500 dark:text-gray-500">Based in</dt>
-      <dd class="mt-1 font-semibold text-gray-800 dark:text-gray-100">
-        Rabat-Salé, Morocco
-      </dd>
-    </div>
-  </dl>
-
-  <nav
-    class="anim-fade-in anim-delay-4 flex flex-wrap gap-4 mt-6"
-    aria-label="Social links and contact"
-  >
-    <SocialPill href={`mailto:${SITE_CONFIG.email}`}>
-      <MailIcon class="size-4" />
-      Contact me
-    </SocialPill>
-    <SocialPill href={SITE_CONFIG.linkedInUrl}>
-      <LinkedInIcon class="size-4" />
-      LinkedIn
-    </SocialPill>
-    <SocialPill href={SITE_CONFIG.githubUrl}>
-      <GitHubIcon class="size-4" />
-      GitHub
-    </SocialPill>
-  </nav>
 </div>
