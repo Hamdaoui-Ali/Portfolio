@@ -71,6 +71,36 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-[#512BD4] text-white",
     category: "Backend",
   },
+  PHP: {
+    key: "PHP",
+    name: "PHP",
+    class: "bg-[#777BB4] text-white",
+    category: "Backend",
+  },
+  LARAVEL: {
+    key: "LARAVEL",
+    name: "Laravel",
+    class: "bg-[#FF2D20] text-white",
+    category: "Backend",
+  },
+  PRISMA: {
+    key: "PRISMA",
+    name: "Prisma",
+    class: "bg-[#2D3748] text-white",
+    category: "Backend",
+  },
+  SUPABASE: {
+    key: "SUPABASE",
+    name: "Supabase",
+    class: "bg-[#3ECF8E] text-black",
+    category: "Backend",
+  },
+  FLYWAY: {
+    key: "FLYWAY",
+    name: "Flyway",
+    class: "bg-[#CC0000] text-white",
+    category: "Backend",
+  },
 
   // ── Frontend ───────────────────────────────────────────
   ANGULAR: {
@@ -121,6 +151,36 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-black text-white",
     category: "Frontend",
   },
+  VITE: {
+    key: "VITE",
+    name: "Vite",
+    class: "bg-[#646CFF] text-white",
+    category: "Frontend",
+  },
+  REACT_QUERY: {
+    key: "REACT_QUERY",
+    name: "React Query",
+    class: "bg-[#FF4154] text-white",
+    category: "Frontend",
+  },
+  REACT_ROUTER: {
+    key: "REACT_ROUTER",
+    name: "React Router",
+    class: "bg-[#CA4245] text-white",
+    category: "Frontend",
+  },
+  RXJS: {
+    key: "RXJS",
+    name: "RxJS",
+    class: "bg-[#B7178C] text-white",
+    category: "Frontend",
+  },
+  LIVEWIRE: {
+    key: "LIVEWIRE",
+    name: "Livewire",
+    class: "bg-[#FB70A9] text-white",
+    category: "Frontend",
+  },
 
   // ── Data & BI ──────────────────────────────────────────
   SSIS: {
@@ -159,6 +219,36 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-[#47A248] text-white",
     category: "Data & BI",
   },
+  DUCKDB: {
+    key: "DUCKDB",
+    name: "DuckDB",
+    class: "bg-[#FFF100] text-black",
+    category: "Data & BI",
+  },
+  PARQUET: {
+    key: "PARQUET",
+    name: "Parquet",
+    class: "bg-[#50ABF1] text-white",
+    category: "Data & BI",
+  },
+  PYARROW: {
+    key: "PYARROW",
+    name: "PyArrow",
+    class: "bg-[#306998] text-white",
+    category: "Data & BI",
+  },
+  POLARS: {
+    key: "POLARS",
+    name: "Polars",
+    class: "bg-[#CD792C] text-white",
+    category: "Data & BI",
+  },
+  DBT: {
+    key: "DBT",
+    name: "dbt",
+    class: "bg-[#FF694A] text-white",
+    category: "Data & BI",
+  },
 
   // ── Automation ─────────────────────────────────────────
   SELENIUM: {
@@ -171,6 +261,60 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "PYTHON",
     name: "Python",
     class: "bg-[#3776AB] text-white",
+    category: "Automation",
+  },
+  HTTPX: {
+    key: "HTTPX",
+    name: "HTTPX",
+    class: "bg-[#0EA5E9] text-white",
+    category: "Automation",
+  },
+  PYDANTIC: {
+    key: "PYDANTIC",
+    name: "Pydantic",
+    class: "bg-[#E92063] text-white",
+    category: "Automation",
+  },
+  RAPIDFUZZ: {
+    key: "RAPIDFUZZ",
+    name: "RapidFuzz",
+    class: "bg-[#8B5CF6] text-white",
+    category: "Automation",
+  },
+  YAML: {
+    key: "YAML",
+    name: "PyYAML",
+    class: "bg-[#CB171E] text-white",
+    category: "Automation",
+  },
+  CUSTOMTKINTER: {
+    key: "CUSTOMTKINTER",
+    name: "CustomTkinter",
+    class: "bg-[#2F80ED] text-white",
+    category: "Automation",
+  },
+  CRYPTOGRAPHY: {
+    key: "CRYPTOGRAPHY",
+    name: "cryptography",
+    class: "bg-[#111827] text-white",
+    category: "Automation",
+  },
+  ARGON2: {
+    key: "ARGON2",
+    name: "Argon2",
+    class: "bg-[#DC2626] text-white",
+    category: "Automation",
+  },
+  SOUNDDEVICE: {
+    key: "SOUNDDEVICE",
+    name: "sounddevice",
+    class: "bg-[#0F766E] text-white",
+    category: "Automation",
+  },
+  LIBROSA: {
+    key: "LIBROSA",
+    name: "librosa",
+    class: "bg-[#EA580C] text-white",
     category: "Automation",
   },
 
@@ -191,6 +335,36 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "POSTMAN",
     name: "Postman",
     class: "bg-[#FF6C37] text-white",
+    category: "Testing",
+  },
+  VITEST: {
+    key: "VITEST",
+    name: "Vitest",
+    class: "bg-[#6E9F18] text-white",
+    category: "Testing",
+  },
+  PLAYWRIGHT: {
+    key: "PLAYWRIGHT",
+    name: "Playwright",
+    class: "bg-[#2EAD33] text-white",
+    category: "Testing",
+  },
+  TESTING_LIBRARY: {
+    key: "TESTING_LIBRARY",
+    name: "Testing Library",
+    class: "bg-[#E33332] text-white",
+    category: "Testing",
+  },
+  PEST: {
+    key: "PEST",
+    name: "Pest",
+    class: "bg-[#F59E0B] text-black",
+    category: "Testing",
+  },
+  TESTCONTAINERS: {
+    key: "TESTCONTAINERS",
+    name: "Testcontainers",
+    class: "bg-[#2496ED] text-white",
     category: "Testing",
   },
 
@@ -229,6 +403,18 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     key: "VERCEL",
     name: "Vercel",
     class: "bg-black text-white",
+    category: "DevOps",
+  },
+  MAVEN: {
+    key: "MAVEN",
+    name: "Maven",
+    class: "bg-[#C71A36] text-white",
+    category: "DevOps",
+  },
+  PYINSTALLER: {
+    key: "PYINSTALLER",
+    name: "PyInstaller",
+    class: "bg-[#3776AB] text-white",
     category: "DevOps",
   },
 
