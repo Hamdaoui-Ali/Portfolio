@@ -55,16 +55,66 @@ test("public metadata matches the current CGI engagement", () => {
 })
 
 test("dead repositories are represented as private, not public code links", () => {
-  const deadRepositories = [
-    "ai-migration-factory",
-    "rifflock-desktop",
-    "smart-solutions",
-  ]
+  const deadRepositories = ["ai-migration-factory", "smart-solutions"]
 
   for (const slug of deadRepositories) {
     const source = read(`src/content/projects/${slug}.md`)
     assert.match(source, /^visibility:\s*private\s*$/m)
     assert.doesNotMatch(source, /github\.com\/Hamdaoui-Ali\//)
+  }
+})
+
+test("new flagship projects link to their verified public GitHub repositories", () => {
+  const verifiedRepositories = {
+    jobfinder: "https://github.com/Hamdaoui-Ali/JobFinder",
+    planops: "https://github.com/Hamdaoui-Ali/PlanOps",
+    remindly: "https://github.com/Hamdaoui-Ali/Remindly",
+    portflow: "https://github.com/Hamdaoui-Ali/PortFlow",
+    medilink: "https://github.com/Hamdaoui-Ali/MediLink",
+    "rifflock-desktop": "https://github.com/Hamdaoui-Ali/RiffLock",
+  }
+
+  for (const [slug, githubUrl] of Object.entries(verifiedRepositories)) {
+    const filePath = join(projectDirectory, `${slug}.md`)
+    assert.ok(existsSync(filePath), `${slug} project entry must exist`)
+
+    const source = frontmatter(filePath)
+    const escapedUrl = githubUrl.replaceAll(".", "\\.")
+    assert.match(source, new RegExp(`^github:\\s*"${escapedUrl}"$`, "m"))
+    assert.match(source, /^visibility:\s*public\s*$/m)
+  }
+})
+
+test("RiffLock describes the current Python security product", () => {
+  const source = read("src/content/projects/rifflock-desktop.md")
+
+  assert.match(source, /Cybersecurity · Desktop · Python/)
+  assert.match(source, /Python 3\.14/)
+  assert.match(source, /Argon2/)
+  assert.match(source, /guitar-riff/i)
+  assert.doesNotMatch(source, /JAVA/)
+})
+
+test("new projects stay grouped before legacy portfolio entries", () => {
+  const expectedSortOrders = {
+    jobfinder: 2,
+    planops: 3,
+    remindly: 4,
+    portflow: 5,
+    medilink: 6,
+    "rifflock-desktop": 7,
+    "web-scraping-automation": 8,
+    "parclick-parking": 9,
+    "7anoutna-ecommerce": 10,
+    "it-equipment-repair": 11,
+    "personal-portfolio": 12,
+    "smart-solutions": 13,
+    "odoo-performance-analysis": 14,
+  }
+
+  for (const [slug, sortOrder] of Object.entries(expectedSortOrders)) {
+    const source = frontmatter(join(projectDirectory, `${slug}.md`))
+    assert.match(source, new RegExp(`^sortOrder:\\s*${sortOrder}\\s*$`, "m"))
   }
 })
 
