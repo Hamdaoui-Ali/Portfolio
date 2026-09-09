@@ -9,8 +9,8 @@ export const SITE_CONFIG = {
   description:
     "Ali Hamdaoui is a Full-Stack Engineer focused on enterprise modernization, agentic migration workflows, Java, Angular, Python, and cloud automation.",
   ogImage: "/og-image.svg",
-  avatarImage: "/avatar.svg",
-  aboutImage: "/photo.svg",
+  avatarImage: "/images/ali-hamdaoui-formal.jpeg",
+  aboutImage: "/images/ali-hamdaoui-conference.jpeg",
   locale: "en_US",
   location: "Morocco, Rabat-Salé",
   worksFor: "CGI",
