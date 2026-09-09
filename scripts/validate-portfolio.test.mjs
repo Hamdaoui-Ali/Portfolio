@@ -224,3 +224,16 @@ test("interactive controls expose responsive and radio-menu semantics", () => {
   assert.match(theme, /menuitemradio/)
   assert.match(theme, /aria-checked/)
 })
+
+test("project explorer wires accessible filters to shareable URL state", () => {
+  const projects = read("src/components/Projects.astro")
+
+  assert.match(projects, /id="project-explorer"/)
+  assert.match(projects, /data-filter-kind="discipline"/)
+  assert.match(projects, /data-filter-kind="technology"/)
+  assert.match(projects, /aria-pressed=/)
+  assert.match(projects, /aria-live="polite"/)
+  assert.match(projects, /history\.replaceState/)
+  assert.match(projects, /Show all projects/)
+  assert.match(projects, /View case study/)
+})

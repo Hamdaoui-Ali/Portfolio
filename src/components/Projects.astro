@@ -1,160 +1,435 @@
 ---
-import GitHub from "./icons/GitHub.astro"
-import NextJS from "./icons/NextJS.astro"
-import Tailwind from "./icons/Tailwind.astro"
-import ExternalLink from "./icons/ExternalLink.astro"
-import LinkButton from "./LinkButton.astro"
 import { getCollection } from "astro:content"
+
+import ExternalLink from "./icons/ExternalLink.astro"
+import GitHub from "./icons/GitHub.astro"
+import ArrowRight from "./icons/ArrowRight.astro"
+import LinkButton from "./LinkButton.astro"
+import {
+  DISCIPLINE_FILTERS,
+  TECHNOLOGY_FILTERS,
+} from "@/data/project-filters.mjs"
 import { TECHNOLOGIES, validateProjectTags } from "@/data/technologies"
 
 const projectsCollection = await getCollection("projects")
 
-const TAG_ICONS: Record<string, any> = {
-  NEXT: NextJS,
-  TAILWIND: Tailwind,
-}
-
 validateProjectTags(
-  projectsCollection.map((p) => ({
-    title: p.data.title,
-    tags: p.data.stack,
+  projectsCollection.map((project) => ({
+    title: project.data.title,
+    tags: project.data.stack,
   })),
 )
 
-const PROJECTS = projectsCollection
+const statusLabels = {
+  completed: "Completed",
+  "in-progress": "In progress",
+  planned: "Planned",
+}
+
+const projects = projectsCollection
   .map((project) => ({
     slug: project.slug,
     title: project.data.title,
     description: project.data.summary,
-    image: project.data.image ?? null,
-    link: project.data.demo ?? null,
+    role: project.data.role,
+    status: project.data.status,
+    category: project.data.category,
+    disciplines: project.data.disciplines,
+    stack: project.data.stack,
+    tags: project.data.stack.map((key) => ({
+      ...(TECHNOLOGIES[key] ?? {
+        key,
+        name: key,
+        class: "bg-gray-500 text-white",
+      }),
+      filterValue:
+        TECHNOLOGY_FILTERS.find((filter) => filter.keys.includes(key))?.value ??
+        null,
+    })),
     github: project.data.github ?? null,
+    demo: project.data.demo ?? null,
     visibility: project.data.visibility ?? "public",
     evidence: project.data.evidence ?? [],
     featured: project.data.featured ?? false,
     sortOrder: project.data.sortOrder ?? 99,
-    category: project.data.category,
-    tags: project.data.stack.map((key) => {
-      const tech = TECHNOLOGIES[key]
-      return tech
-        ? { ...tech, icon: TAG_ICONS[key] ?? null }
-        : { name: key, class: "bg-gray-500 text-white", icon: null }
-    }),
   }))
-  .sort((a, b) => {
-    if (a.featured && !b.featured) return -1
-    if (!a.featured && b.featured) return 1
-    return a.sortOrder - b.sortOrder
-  })
+  .sort((a, b) => a.sortOrder - b.sortOrder)
+
+const flagshipCount = projects.filter((project) => project.featured).length
 ---
 
-<div class="flex flex-col gap-y-16">
-  {
-    PROJECTS.map(
-      ({
-        slug,
-        image,
-        title,
-        description,
-        category,
-        tags,
-        link,
-        github,
-        visibility,
-        evidence,
-        featured,
-      }) => (
-        <article
-          class={`flex flex-col space-x-0 space-y-6 group md:flex-row md:space-x-10 md:space-y-0 ${featured ? "featured-project" : ""}`}
-        >
-          {image && (
-            <div class="w-full md:w-1/2">
-              <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-[0_20px_60px_-10px_rgba(251,191,36,0.2)] lg:border lg:border-gray-800 lg:hover:border-yellow-400/30 lg:hover:bg-gray-800/50">
-                <img
-                  alt={title}
-                  class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-                  loading="lazy"
-                  src={image}
-                />
-                <div
-                  class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-          )}
-
-          <div
-            class={`w-full ${image ? "md:w-1/2 md:max-w-lg" : "md:max-w-xl"} flex flex-col justify-center`}
+<div id="project-explorer" class="space-y-8">
+  <div
+    class="rounded-2xl border border-gray-200 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-gray-800 dark:bg-gray-900/70 sm:p-5"
+  >
+    <div class="flex flex-col gap-5">
+      <div>
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.18em] text-yellow-600 dark:text-yellow-400"
+            >
+              Explore by engineering discipline
+            </p>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              Start broad, then refine by the technology your role needs.
+            </p>
+          </div>
+          <button
+            type="button"
+            data-reset-filters
+            class="min-h-11 rounded-xl px-3 py-2 text-sm font-semibold text-gray-600 underline decoration-gray-300 underline-offset-4 transition hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:text-gray-300 dark:decoration-gray-700 dark:hover:text-yellow-300"
           >
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-              <a
-                href={`/projects/${slug}`}
-                class="hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+            Reset
+          </button>
+        </div>
+
+        <div
+          class="mt-3 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter projects by discipline"
+        >
+          {
+            DISCIPLINE_FILTERS.map((filter) => (
+              <button
+                type="button"
+                data-filter-kind="discipline"
+                data-filter-value={filter.value}
+                aria-pressed={filter.value === "all" ? "true" : "false"}
+                class="project-filter min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-2 text-sm font-medium text-gray-700 transition hover:border-yellow-400/60 hover:text-yellow-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-200 dark:hover:border-yellow-400/60 dark:hover:text-yellow-300"
               >
-                {title}
-              </a>
-            </h3>
-            <div class="flex flex-wrap items-center gap-2 mt-2">
-              <span class="rounded-full bg-yellow-400/10 border border-yellow-400/30 px-2.5 py-0.5 text-[11px] font-medium text-yellow-600 dark:text-yellow-400">
-                {category}
-              </span>
+                {filter.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 pt-4 dark:border-gray-800">
+        <p class="text-xs font-medium text-gray-500 dark:text-gray-500">
+          Refine by technology
+        </p>
+        <div
+          class="mt-2 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter projects by technology"
+        >
+          {
+            TECHNOLOGY_FILTERS.map((filter) => (
+              <button
+                type="button"
+                data-filter-kind="technology"
+                data-filter-value={filter.value}
+                aria-pressed={filter.value === "all" ? "true" : "false"}
+                class="project-filter min-h-10 rounded-full border border-gray-200 bg-gray-50 px-3 py-2 text-xs font-medium text-gray-600 transition hover:border-yellow-400/60 hover:text-yellow-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-yellow-400/60 dark:hover:text-yellow-300"
+              >
+                {filter.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <p
+      data-project-count
+      aria-live="polite"
+      class="text-sm font-medium text-gray-600 dark:text-gray-400"
+    >
+      {flagshipCount} selected projects
+    </p>
+    <button
+      type="button"
+      data-show-all-projects
+      class="inline-flex min-h-11 items-center gap-2 rounded-xl border border-gray-300 bg-white/70 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:border-yellow-400 hover:text-yellow-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:border-yellow-400 dark:hover:text-yellow-300"
+    >
+      Show all projects
+      <span aria-hidden="true">+</span>
+    </button>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2" data-project-grid>
+    {
+      projects.map((project) => (
+        <article
+          data-project-card
+          data-featured={String(project.featured)}
+          data-disciplines={project.disciplines.join(" ")}
+          data-stack={project.stack.join(" ")}
+          class={`project-card group relative flex min-h-full flex-col overflow-hidden rounded-2xl border bg-white/75 p-5 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-900/75 sm:p-6 ${
+            project.featured
+              ? "border-yellow-400/35 shadow-[0_16px_45px_-32px_rgba(245,158,11,0.85)] dark:border-yellow-400/30"
+              : "border-gray-200 dark:border-gray-800"
+          }`}
+        >
+          <div
+            class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/70 to-transparent opacity-0 transition group-hover:opacity-100"
+            aria-hidden="true"
+          />
+
+          <header class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-yellow-700 dark:text-yellow-400">
+                {project.role}
+              </p>
+              <h3 class="mt-1 text-2xl font-bold text-gray-900 dark:text-white">
+                <a
+                  href={`/projects/${project.slug}`}
+                  class="rounded-sm transition hover:text-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 dark:hover:text-yellow-300"
+                >
+                  {project.title}
+                </a>
+              </h3>
             </div>
-            <ul class="flex flex-row flex-wrap mt-3 gap-2">
-              {tags.map((tag) => (
-                <li>
+            <span class="shrink-0 rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-[11px] font-medium text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
+              {statusLabels[project.status]}
+            </span>
+          </header>
+
+          <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-500">
+            {project.category}
+          </p>
+          <p class="mt-4 text-[15px] leading-relaxed text-gray-700 dark:text-gray-300">
+            {project.description}
+          </p>
+
+          {project.evidence.length > 0 && (
+            <ul class="mt-5 space-y-2 text-sm text-gray-600 dark:text-gray-400">
+              {project.evidence.slice(0, 2).map((item) => (
+                <li class="flex gap-2.5">
                   <span
-                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+                    class="mt-1 text-yellow-500 dark:text-yellow-400"
+                    aria-hidden="true"
                   >
-                    {tag.icon && <tag.icon class="size-4" />}
-                    {tag.name}
+                    →
                   </span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
+          )}
 
-            <p class="mt-3 text-gray-700 dark:text-gray-400 text-pretty">
-              {description}
-            </p>
-            {featured && evidence.length > 0 && (
-              <div class="mt-4 rounded-xl border border-yellow-400/20 bg-yellow-400/[0.04] p-3 dark:bg-yellow-400/[0.06]">
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-700 dark:text-yellow-300">
-                  Evidence in the case study
-                </p>
-                <ul class="mt-2 grid gap-1 text-sm text-gray-700 dark:text-gray-300 sm:grid-cols-2">
-                  {evidence.map((item) => (
-                    <li class="flex gap-2">
-                      <span class="text-yellow-500" aria-hidden="true">
-                        →
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Technologies">
+            {project.tags.slice(0, 7).map((tag) => (
+              <li>
+                {tag.filterValue ? (
+                  <button
+                    type="button"
+                    data-card-technology={tag.filterValue}
+                    class={`rounded-full px-2.5 py-1 text-[11px] font-medium transition hover:ring-2 hover:ring-yellow-400/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 ${tag.class}`}
+                    aria-label={`Filter projects by ${tag.name}`}
+                  >
+                    {tag.name}
+                  </button>
+                ) : (
+                  <span
+                    class={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium ${tag.class}`}
+                  >
+                    {tag.name}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <footer class="mt-auto flex flex-wrap items-center gap-2 border-t border-gray-200 pt-5 dark:border-gray-800">
+            <a
+              href={`/projects/${project.slug}`}
+              class="inline-flex min-h-11 items-center gap-2 rounded-xl bg-gray-900 px-3 py-2 text-sm font-semibold text-white transition hover:bg-yellow-500 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 dark:bg-white dark:text-gray-950 dark:hover:bg-yellow-400 dark:focus-visible:ring-offset-gray-950"
+            >
+              View case study
+              <ArrowRight class="size-4" />
+            </a>
+            {project.github && (
+              <LinkButton href={project.github}>
+                <GitHub class="size-4" />
+                Code
+              </LinkButton>
             )}
-            <footer class="flex items-center mt-4 gap-x-4">
-              {github && (
-                <LinkButton href={github}>
-                  <GitHub class="size-5" />
-                  Code
-                </LinkButton>
-              )}
-              {link && (
-                <LinkButton href={link}>
-                  <ExternalLink class="size-4" />
-                  Preview
-                </LinkButton>
-              )}
-              {!github && visibility === "private" && (
-                <span class="inline-flex min-h-11 items-center rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
-                  Private repository
-                </span>
-              )}
-            </footer>
-          </div>
+            {project.demo && (
+              <LinkButton href={project.demo}>
+                <ExternalLink class="size-4" />
+                Live
+              </LinkButton>
+            )}
+            {!project.github && project.visibility === "private" && (
+              <span class="inline-flex min-h-11 items-center rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
+                Private repository
+              </span>
+            )}
+          </footer>
         </article>
-      ),
-    )
-  }
+      ))
+    }
+  </div>
+
+  <div
+    data-project-empty
+    hidden
+    class="rounded-2xl border border-dashed border-gray-300 px-6 py-12 text-center dark:border-gray-700"
+  >
+    <p class="font-semibold text-gray-800 dark:text-gray-100">
+      No projects match this combination yet.
+    </p>
+    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+      Reset the filters to explore the complete portfolio.
+    </p>
+  </div>
 </div>
+
+<script>
+  import {
+    buildFilterSearch,
+    parseFilterSearch,
+    selectVisibleProjects,
+  } from "@/data/project-filters.mjs"
+
+  const initializeProjectExplorer = (): void => {
+    const previousController = (window as any).__projectExplorerController as
+      AbortController | undefined
+    previousController?.abort()
+
+    const root = document.getElementById("project-explorer")
+    if (!root) return
+
+    const controller = new AbortController()
+    ;(window as any).__projectExplorerController = controller
+    const { signal } = controller
+    const cards = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-project-card]"),
+    )
+    const filterButtons = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-filter-kind]"),
+    )
+    const count = root.querySelector<HTMLElement>("[data-project-count]")
+    const empty = root.querySelector<HTMLElement>("[data-project-empty]")
+    const showAllButton = root.querySelector<HTMLButtonElement>(
+      "[data-show-all-projects]",
+    )
+    const resetButton = root.querySelector<HTMLButtonElement>(
+      "[data-reset-filters]",
+    )
+    const cardTechnologyButtons = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-card-technology]"),
+    )
+
+    const projects = cards.map((card) => ({
+      element: card,
+      featured: card.dataset.featured === "true",
+      disciplines: card.dataset.disciplines?.split(" ").filter(Boolean) ?? [],
+      stack: card.dataset.stack?.split(" ").filter(Boolean) ?? [],
+    }))
+
+    let state = parseFilterSearch(window.location.search)
+    let showAll = false
+
+    const render = (updateUrl = true): void => {
+      const visibleProjects = new Set(
+        selectVisibleProjects(projects, state, showAll),
+      )
+      const hasActiveFilter =
+        state.discipline !== "all" || state.technology !== "all"
+
+      projects.forEach((project) => {
+        project.element.hidden = !visibleProjects.has(project)
+      })
+
+      filterButtons.forEach((button) => {
+        const kind = button.dataset.filterKind as "discipline" | "technology"
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.filterValue === state[kind]),
+        )
+      })
+
+      const visibleCount = visibleProjects.size
+      if (count) {
+        count.textContent = `${visibleCount} ${
+          hasActiveFilter ? "matching" : showAll ? "total" : "selected"
+        } ${visibleCount === 1 ? "project" : "projects"}`
+      }
+      if (empty) empty.hidden = visibleCount !== 0
+      if (showAllButton) showAllButton.hidden = hasActiveFilter || showAll
+
+      if (updateUrl) {
+        const search = buildFilterSearch(window.location.search, state)
+        history.replaceState(
+          history.state,
+          "",
+          `${window.location.pathname}${search}${window.location.hash}`,
+        )
+      }
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          const kind = button.dataset.filterKind as "discipline" | "technology"
+          state = { ...state, [kind]: button.dataset.filterValue ?? "all" }
+          showAll = false
+          render()
+        },
+        { signal },
+      )
+    })
+
+    cardTechnologyButtons.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          state = {
+            ...state,
+            technology: button.dataset.cardTechnology ?? "all",
+          }
+          showAll = false
+          render()
+          root.scrollIntoView({ behavior: "smooth", block: "start" })
+        },
+        { signal },
+      )
+    })
+
+    showAllButton?.addEventListener(
+      "click",
+      () => {
+        showAll = true
+        render(false)
+      },
+      { signal },
+    )
+
+    resetButton?.addEventListener(
+      "click",
+      () => {
+        state = { discipline: "all", technology: "all" }
+        showAll = false
+        render()
+      },
+      { signal },
+    )
+
+    render(false)
+  }
+
+  document.addEventListener("astro:page-load", initializeProjectExplorer)
+</script>
+
+<style>
+  .project-filter[aria-pressed="true"] {
+    @apply border-yellow-400 bg-yellow-400 text-gray-950 shadow-sm;
+  }
+
+  :global(.dark) .project-filter[aria-pressed="true"] {
+    @apply border-yellow-400 bg-yellow-400 text-gray-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-filter {
+      transition: none;
+    }
+  }
+</style>
