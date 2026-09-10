@@ -99,9 +99,12 @@ test("public metadata leads with Software Engineer while preserving CGI history"
   assert.match(site, /jobTitle:\s*"Software Engineer"/)
   assert.doesNotMatch(site, /worksFor:\s*"CGI"/)
   assert.match(site, /alihamdaoui000@gmail\.com/)
-  assert.match(experience, /Software Engineer — PFE Intern/)
-  assert.match(experience, /Mar 2026 — Aug 2026/)
-  assert.match(experience, /current:\s*false/)
+  const cgiEntry = experience.match(
+    /\{\s*date:\s*"Mar 2026 — Aug 2026"[\s\S]*?company:\s*"CGI"[\s\S]*?\n\s*\},/,
+  )
+  assert.ok(cgiEntry, "CGI experience entry must remain present")
+  assert.match(cgiEntry[0], /title:\s*"Software Engineer — PFE Intern"/)
+  assert.match(cgiEntry[0], /current:\s*false/)
 })
 
 test("dead repositories are represented as private, not public code links", () => {
@@ -249,6 +252,9 @@ test("project explorer wires accessible filters to shareable URL state", () => {
 test("project explorer hidden state overrides card and button display utilities", () => {
   const projects = read("src/components/Projects.astro")
 
+  assert.match(projects, /data-project-controls\s+hidden/)
+  assert.match(projects, /control\.hidden = false/)
+  assert.match(projects, /\[data-project-controls\]\[hidden\]/)
   assert.match(projects, /\[data-project-card\]\[hidden\]/)
   assert.match(projects, /\[data-show-all-projects\]\[hidden\]/)
   assert.match(projects, /display:\s*none\s*!important/)
