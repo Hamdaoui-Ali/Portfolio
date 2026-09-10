@@ -60,6 +60,8 @@ const flagshipCount = projects.filter((project) => project.featured).length
 
 <div id="project-explorer" class="space-y-8">
   <div
+    data-project-controls
+    hidden
     class="rounded-2xl border border-gray-200 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-gray-800 dark:bg-gray-900/70 sm:p-5"
   >
     <div class="flex flex-col gap-5">
@@ -132,7 +134,11 @@ const flagshipCount = projects.filter((project) => project.featured).length
     </div>
   </div>
 
-  <div class="flex flex-wrap items-center justify-between gap-3">
+  <div
+    data-project-controls
+    hidden
+    class="flex flex-wrap items-center justify-between gap-3"
+  >
     <p
       data-project-count
       aria-live="polite"
@@ -314,6 +320,9 @@ const flagshipCount = projects.filter((project) => project.featured).length
     const cardTechnologyButtons = Array.from(
       root.querySelectorAll<HTMLButtonElement>("[data-card-technology]"),
     )
+    const controls = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-project-controls]"),
+    )
 
     const projects = cards.map((card) => ({
       element: card,
@@ -355,6 +364,7 @@ const flagshipCount = projects.filter((project) => project.featured).length
       }
       if (empty) empty.hidden = visibleCount !== 0
       if (showAllButton) showAllButton.hidden = hasActiveFilter || showAll
+      if (resetButton) resetButton.hidden = !hasActiveFilter && !showAll
 
       if (updateUrl) {
         const search = buildFilterSearch(window.location.search, state)
@@ -417,6 +427,9 @@ const flagshipCount = projects.filter((project) => project.featured).length
       { signal },
     )
 
+    controls.forEach((control) => {
+      control.hidden = false
+    })
     render(false)
   }
 
@@ -425,7 +438,9 @@ const flagshipCount = projects.filter((project) => project.featured).length
 
 <style>
   [data-project-card][hidden],
-  [data-show-all-projects][hidden] {
+  [data-project-controls][hidden],
+  [data-show-all-projects][hidden],
+  [data-reset-filters][hidden] {
     display: none !important;
   }
 
