@@ -232,6 +232,16 @@ test("interactive controls expose responsive and radio-menu semantics", () => {
   assert.match(theme, /aria-checked/)
 })
 
+test("header stays in document flow before sticking during scroll", () => {
+  const header = read("src/components/Header.astro")
+
+  assert.match(header, /<header class="sticky top-0 z-10 mt-4 w-full px-4">/)
+  assert.doesNotMatch(
+    header,
+    /<header class="fixed top-0 z-10 mt-4 w-full px-4">/,
+  )
+})
+
 test("project explorer wires accessible filters to shareable URL state", () => {
   const projects = read("src/components/Projects.astro")
 
