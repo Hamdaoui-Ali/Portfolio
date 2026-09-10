@@ -242,6 +242,20 @@ test("header stays in document flow before sticking during scroll", () => {
   )
 })
 
+test("hero identity badge keeps readable content on narrow layouts", () => {
+  const badge = read("src/components/Badge.astro")
+  const hero = read("src/components/Hero.astro")
+
+  assert.match(badge, /absolute inset-\[-1000%\] z-0/)
+  assert.match(badge, /relative z-10 inline-flex/)
+  assert.doesNotMatch(badge, /whitespace-nowrap/)
+  assert.match(
+    hero,
+    /class="anim-fade-in mb-6 flex flex-wrap items-center gap-4"/,
+  )
+  assert.match(hero, /class="flex min-w-0 max-w-full items-center/)
+})
+
 test("project explorer wires accessible filters to shareable URL state", () => {
   const projects = read("src/components/Projects.astro")
 

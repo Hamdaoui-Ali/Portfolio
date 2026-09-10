@@ -11,7 +11,7 @@ import { SITE_CONFIG } from "@/data/site"
 
 <div class="grid items-center gap-10 lg:grid-cols-[1fr_17rem] lg:gap-14">
   <div class="max-w-3xl">
-    <div class="anim-fade-in mb-6 flex items-center gap-4">
+    <div class="anim-fade-in mb-6 flex flex-wrap items-center gap-4">
       <div class="relative flex-shrink-0 lg:hidden">
         <div
           class="absolute inset-0 scale-125 rounded-full bg-yellow-400/25 blur-xl dark:bg-yellow-400/15"
@@ -28,7 +28,7 @@ import { SITE_CONFIG } from "@/data/site"
         href={SITE_CONFIG.linkedInUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center rounded-full transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+        class="flex min-w-0 max-w-full items-center rounded-full transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
       >
         <Badge
           ><SparklesIcon class="size-3" /> Engineer · Builder · Innovator</Badge
