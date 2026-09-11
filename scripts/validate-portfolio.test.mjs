@@ -92,6 +92,50 @@ test("Migration Factory reflects its current agentic MVP", () => {
   assert.match(source, /estimated/i)
 })
 
+test("ParClick exposes the verified Django technology stack", () => {
+  const source = frontmatter(
+    join(projectDirectory, "parclick-parking.md"),
+  )
+
+  assert.match(
+    source,
+    /^github:\s*"https:\/\/github\.com\/Hamdaoui-Ali\/ParClick"$/m,
+  )
+  assert.match(source, /^visibility:\s*public\s*$/m)
+  assert.match(
+    source,
+    /^stack:\s*\["PYTHON", "DJANGO", "BOOTSTRAP", "SQLITE", "QRCODE", "PILLOW", "REPORTLAB"\]\s*$/m,
+  )
+})
+
+test("ParClick narrative matches implemented Django workflows", () => {
+  const source = read("src/content/projects/parclick-parking.md")
+
+  for (const technology of [
+    /Django 5\.2/i,
+    /Bootstrap 5/i,
+    /SQLite/i,
+    /QRCode/i,
+    /Pillow/i,
+    /ReportLab/i,
+  ]) {
+    assert.match(source, technology)
+  }
+
+  for (const staleFact of [
+    /\bJAVA\b/,
+    /\bSPRING_BOOT\b/,
+    /\bANGULAR\b/,
+    /\bMYSQL\b/,
+    /Spring Boot/i,
+    /Angular/i,
+    /payment integration/i,
+    /real-time space tracking/i,
+  ]) {
+    assert.doesNotMatch(source, staleFact)
+  }
+})
+
 test("public metadata leads with Software Engineer while preserving CGI history", () => {
   const site = read("src/data/site.ts")
   const experience = read("src/data/experience.ts")
