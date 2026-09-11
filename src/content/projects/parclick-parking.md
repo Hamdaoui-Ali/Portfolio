@@ -9,7 +9,8 @@ github: "https://github.com/Hamdaoui-Ali/ParClick"
 visibility: public
 featured: false
 sortOrder: 11
-stack: ["PYTHON", "DJANGO", "BOOTSTRAP", "SQLITE", "QRCODE", "PILLOW", "REPORTLAB"]
+stack:
+  ["PYTHON", "DJANGO", "BOOTSTRAP", "SQLITE", "QRCODE", "PILLOW", "REPORTLAB"]
 ---
 
 ## Overview

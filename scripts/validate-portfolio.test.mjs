@@ -93,9 +93,7 @@ test("Migration Factory reflects its current agentic MVP", () => {
 })
 
 test("ParClick exposes the verified Django technology stack", () => {
-  const source = frontmatter(
-    join(projectDirectory, "parclick-parking.md"),
-  )
+  const source = frontmatter(join(projectDirectory, "parclick-parking.md"))
 
   assert.match(
     source,
@@ -104,7 +102,7 @@ test("ParClick exposes the verified Django technology stack", () => {
   assert.match(source, /^visibility:\s*public\s*$/m)
   assert.match(
     source,
-    /^stack:\s*\["PYTHON", "DJANGO", "BOOTSTRAP", "SQLITE", "QRCODE", "PILLOW", "REPORTLAB"\]\s*$/m,
+    /^stack:\s*\[\s*"PYTHON",\s*"DJANGO",\s*"BOOTSTRAP",\s*"SQLITE",\s*"QRCODE",\s*"PILLOW",\s*"REPORTLAB"\s*\]\s*$/m,
   )
 })
 
