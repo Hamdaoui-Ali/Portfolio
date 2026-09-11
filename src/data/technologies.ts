@@ -47,6 +47,24 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     class: "bg-[#092E20] text-white",
     category: "Backend",
   },
+  QRCODE: {
+    key: "QRCODE",
+    name: "QRCode",
+    class: "bg-[#16A34A] text-white",
+    category: "Backend",
+  },
+  PILLOW: {
+    key: "PILLOW",
+    name: "Pillow",
+    class: "bg-[#3776AB] text-white",
+    category: "Backend",
+  },
+  REPORTLAB: {
+    key: "REPORTLAB",
+    name: "ReportLab",
+    class: "bg-[#92400E] text-white",
+    category: "Backend",
+  },
   FLASK: {
     key: "FLASK",
     name: "Flask",
