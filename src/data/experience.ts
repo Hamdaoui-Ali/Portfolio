@@ -19,8 +19,8 @@ const experience: ExperienceEntry[] = [
   },
   {
     date: "Jul 2025 — Sep 2025",
-    title: "Data Analyst — Intern",
-    company: "Sofrecom Services Maroc",
+    title: "Data Engineer — Intern",
+    company: "DXC Technology Maroc",
     description:
       "Designed and delivered an AdventureWorks2022 decision-support solution with a star-schema warehouse, SSIS ETL flows, an SSAS cube, DAX measures, and Power BI dashboards.",
   },
