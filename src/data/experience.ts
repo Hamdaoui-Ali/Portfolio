@@ -32,6 +32,8 @@ const experience: ExperienceEntry[] = [
     company: "DXC Technology Maroc",
     description:
       "Designed and delivered an AdventureWorks2022 decision-support solution with a star-schema warehouse, SSIS ETL flows, an SSAS cube, DAX measures, and Power BI dashboards.",
+    link: "https://www.dxc technology.com",
+    current: false,
   },
   {
     date: "May 2025 — Jul 2025",
