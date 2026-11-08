@@ -134,19 +134,30 @@ test("ParClick narrative matches implemented Django workflows", () => {
   }
 })
 
-test("public metadata leads with Software Engineer while preserving CGI history", () => {
+test("public metadata and experience show APM Terminals as the current role", () => {
   const site = read("src/data/site.ts")
   const experience = read("src/data/experience.ts")
+  const layout = read("src/layouts/Layout.astro")
 
-  assert.match(site, /jobTitle:\s*"Software Engineer"/)
-  assert.doesNotMatch(site, /worksFor:\s*"CGI"/)
+  assert.match(site, /jobTitle:\s*"OT Process Controller"/)
+  assert.match(layout, /worksFor:[\s\S]*?name:\s*"APM Terminals"/)
   assert.match(site, /alihamdaoui000@gmail\.com/)
+  const apmEntry = experience.match(
+    /\{\s*date:\s*"Oct 2026 — Present"[\s\S]*?company:\s*"APM Terminals"[\s\S]*?\n\s*\},/,
+  )
+  assert.ok(apmEntry, "APM Terminals experience entry must be present")
+  assert.match(apmEntry[0], /title:\s*"OT Process Controller — Full-time"/)
+  assert.match(apmEntry[0], /current:\s*true/)
   const cgiEntry = experience.match(
     /\{\s*date:\s*"Mar 2026 — Aug 2026"[\s\S]*?company:\s*"CGI"[\s\S]*?\n\s*\},/,
   )
   assert.ok(cgiEntry, "CGI experience entry must remain present")
   assert.match(cgiEntry[0], /title:\s*"Software Engineer — PFE Intern"/)
   assert.match(cgiEntry[0], /current:\s*false/)
+  assert.ok(
+    experience.indexOf('company: "APM Terminals"') <
+      experience.indexOf('company: "CGI"'),
+  )
 })
 
 test("dead repositories are represented as private, not public code links", () => {
@@ -216,10 +227,11 @@ test("projects use the approved recruiter-first portfolio order", () => {
   }
 })
 
-test("homepage hero leads with broad Software Engineer positioning", () => {
+test("homepage hero shows the current APM Terminals role and software work", () => {
   const source = read("src/components/Hero.astro")
 
-  assert.match(source, /Software Engineer/)
+  assert.match(source, /OT Process Controller at APM Terminals/)
+  assert.match(source, /full-stack products/)
   assert.match(source, /Explore selected work/)
   assert.match(source, /Hamdaoui_Ali_CV_FR\.pdf/)
   assert.match(source, /download="Hamdaoui_Ali_CV_FR\.pdf"/)
