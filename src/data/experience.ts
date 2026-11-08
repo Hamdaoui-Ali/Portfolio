@@ -41,7 +41,7 @@ const experience: ExperienceEntry[] = [
     company: "Yuccainfo",
     description:
       "Contributed to a supermarket ERP by developing Spring Boot REST APIs, Angular interfaces, product, inventory, and sales modules, with MySQL persistence and Postman validation.",
-  link: "https://www.yuccainfo.com",
+    link: "https://www.yuccainfo.com",
     current: false,
   },
   {
