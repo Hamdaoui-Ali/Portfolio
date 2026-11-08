@@ -59,6 +59,8 @@ const experience: ExperienceEntry[] = [
     company: "3alink",
     description:
       "Analyzed Odoo performance constraints and built a responsive prototype focused on the identified improvement areas.",
+    link: "https://www.3alink.com",
+    current: false,
   },
 ]
 
