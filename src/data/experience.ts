@@ -13,7 +13,7 @@ const experience: ExperienceEntry[] = [
     title: "OT Process Controller — Full-time",
     company: "APM Terminals",
     description:
-      "Working full-time in OT process control at APM Terminals since October 2026.",
+      "At APM Terminals MedPort Tangier (TM2), I help keep semi-automated terminal operations safe and reliable. From the Integrated Operations Center, I monitor critical OT systems and equipment connectivity in real time, investigate incidents, and coordinate resolution with Operations, IT, and Asset Management. My work helps protect system availability, minimize disruptions, and sustain operational continuity.",
     link: "https://www.apmterminals.com",
     current: true,
   },
