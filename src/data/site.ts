@@ -4,10 +4,10 @@ export const SITE_CONFIG = {
   url: SITE_URL,
   name: "Ali Hamdaoui · Portfolio",
   author: "Ali Hamdaoui",
-  jobTitle: "Software Engineer",
-  title: "Ali Hamdaoui — Software Engineer | Web, Data & Automation",
+  jobTitle: "OT Process Controller",
+  title: "Ali Hamdaoui — OT Process Controller | Software Engineer",
   description:
-    "Software Engineer building reliable products across full-stack web, backend APIs, data engineering, automation, AI, and desktop security.",
+    "Full-time OT Process Controller at APM Terminals since October 2026. Software engineer building reliable web, data, and automation tools.",
   ogImage: "/og-image.svg",
   avatarImage: "/images/ali-hamdaoui-formal.jpeg",
   aboutImage: "/images/ali-hamdaoui-conference.jpeg",
