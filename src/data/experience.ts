@@ -41,6 +41,8 @@ const experience: ExperienceEntry[] = [
     company: "Yuccainfo",
     description:
       "Contributed to a supermarket ERP by developing Spring Boot REST APIs, Angular interfaces, product, inventory, and sales modules, with MySQL persistence and Postman validation.",
+  link: "https://www.yuccainfo.com",
+    current: false,
   },
   {
     date: "Jul 2024 — Sep 2024",
@@ -48,6 +50,8 @@ const experience: ExperienceEntry[] = [
     company: "2Peerfect",
     description:
       "Analyzed an existing website, built responsive interactive interfaces, and introduced web-scraping automation to extract and structure data.",
+    link: "https://www.2peerfect.com",
+    current: false,
   },
   {
     date: "Jun 2024 — Jul 2024",
