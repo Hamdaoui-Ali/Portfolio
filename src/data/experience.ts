@@ -9,6 +9,14 @@ export interface ExperienceEntry {
 
 const experience: ExperienceEntry[] = [
   {
+    date: "Oct 2026 — Present",
+    title: "OT Process Controller — Full-time",
+    company: "APM Terminals",
+    description:
+      "Working full-time in OT process control at APM Terminals since October 2026.",
+    current: true,
+  },
+  {
     date: "Mar 2026 — Aug 2026",
     title: "Software Engineer — PFE Intern",
     company: "CGI",
